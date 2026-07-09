@@ -20,14 +20,13 @@ GURDWARA_INFO = {
     "name": "El Sobrante Gurdwara Sahib",
     "address_line1": "3550 Hillcrest Rd",
     "address_line2": "El Sobrante, CA 94803",
-    "phone": "(510) 223-9987",
-    "email": "info@elsobrantegurdwara.org",
+    "phone_main": "(510) 223-9987",
+    "phone_alt": "(510) 223-1102",
+    "email": "info@thesikhcenter.com",
+    "website": "https://thesikhcenter.com",
     "youtube_channel_url": "https://www.youtube.com/c/ElSobranteGurdwaraSahib",
-    # Channel ID (UC...) needed for the live stream iframe embed.
-    # To find it: open youtube.com/c/ElSobranteGurdwaraSahib in a browser,
-    # right-click → View Page Source, search for "UC" — it's a 24-char string
-    # like UCxxxxxxxxxxxxxxxxxxxxxxxxx. Replace the value below.
     "youtube_channel_id": "UCx1y5VenBaV9WspiK_oAnxQ",
+    "facebook_url": "https://www.facebook.com/sfsikhcenter",
     "maps_directions_url": (
         "https://www.google.com/maps/search/?api=1"
         "&query=3550+Hillcrest+Rd+El+Sobrante+CA+94803"

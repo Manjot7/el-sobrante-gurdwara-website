@@ -122,69 +122,87 @@
     <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">El Sobrante Gurdwara Sahib</p>
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Livestream</h1>
     <p class="text-gray-300 text-sm">
-      Watch Sunday diwan and special events live on YouTube — no account needed.
+      Daily live diwan on YouTube — morning and evening, 7 days a week. No account needed.
     </p>
   </div>
 </section>
 
 <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
 
-  <!-- ── YOUTUBE EMBED ───────────────────────────────────────────────────── -->
-  <!-- Static iframe pointing at the channel's live tab.
-       YouTube shows its own "offline" state when nothing is streaming —
-       no API key, no custom logic, nothing to maintain. -->
-  <div class="rounded-2xl overflow-hidden shadow-2xl bg-black mb-8">
-    <div class="relative w-full" style="padding-bottom: 56.25%;">
-      <iframe
-        class="absolute inset-0 w-full h-full"
-        src="https://www.youtube.com/embed/live_stream?channel=UCx1y5VenBaV9WspiK_oAnxQ&autoplay=0"
-        title="El Sobrante Gurdwara Sahib — Live Stream"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
+  <!-- ── WATCH LIVE PANEL ───────────────────────────────────────────────── -->
+  <!-- YouTube's live_stream?channel= embed format is no longer supported.
+       Visitors are linked directly to the channel's live tab instead. -->
+  <div class="rounded-2xl overflow-hidden shadow-xl bg-navy-900 mb-8">
+    <div class="relative w-full flex flex-col items-center justify-center text-white text-center px-6 py-16"
+         style="background: linear-gradient(135deg, #0F1F3D 0%, #1B3A6B 60%, #152D54 100%);">
+      <!-- Decorative glow -->
+      <div class="absolute inset-0 opacity-20"
+           style="background: radial-gradient(ellipse at 50% 50%, #F5821F 0%, transparent 70%)"></div>
+      <div class="relative z-10">
+        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
+          <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold mb-2">Watch Live on YouTube</h2>
+        <p class="text-gray-300 text-sm mb-6 max-w-md">
+          Daily diwan is streamed live every morning and evening. Click below to open the channel on YouTube.
+        </p>
+        <a href="https://www.youtube.com/c/ElSobranteGurdwaraSahib/live" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3.5 rounded-xl transition-colors shadow-lg text-base">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
+          </svg>
+          Open Live Stream
+        </a>
+        <p class="text-gray-500 text-xs mt-4">
+          Opens YouTube in a new tab. Subscribe to get notified when diwan begins.
+        </p>
+      </div>
     </div>
   </div>
 
-  <!-- ── STATUS NOTE ────────────────────────────────────────────────────── -->
-  <div class="flex flex-col sm:flex-row gap-4 mb-10">
-    <div class="flex-1 bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-800">
-      <strong class="block mb-1">🔴 When we're live</strong>
-      The player above will show the live stream automatically. No refresh needed.
+  <!-- ── DAILY PROGRAM SCHEDULE ─────────────────────────────────────────── -->
+  <div class="bg-white border border-gray-100 rounded-xl shadow-sm mb-6 overflow-hidden">
+    <div class="bg-navy-800 text-white px-6 py-4">
+      <h2 class="font-bold text-lg">Daily Live Program</h2>
+      <p class="text-gray-300 text-xs mt-0.5">7 days a week — streamed live from the Gurdwara</p>
     </div>
-    <div class="flex-1 bg-gray-50 border border-gray-100 rounded-xl p-4 text-sm text-gray-600">
-      <strong class="block mb-1 text-gray-700">📴 When we're offline</strong>
-      YouTube shows an "offline" or "no upcoming live streams" screen — the Gurdwara is not currently streaming.
-    </div>
-  </div>
+    <div class="divide-y divide-gray-50">
 
-  <!-- ── STREAMING SCHEDULE ─────────────────────────────────────────────── -->
-  <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm mb-8">
-    <h2 class="text-lg font-bold text-navy-900 mb-4">Regular Streaming Days</h2>
-    <div class="space-y-3">
-
-      <div class="flex items-start gap-4 py-3 border-b border-gray-50">
-        <div class="w-28 flex-shrink-0 font-semibold text-navy-800">Sunday</div>
-        <div class="text-sm text-gray-600">
-          <div class="font-medium text-gray-800 mb-0.5">Asa Di Var &amp; Sunday Diwan</div>
-          <div class="text-gray-400">9:00 AM – 12:30 PM PT</div>
+      <div class="px-6 py-4 flex items-start gap-5">
+        <div class="w-6 h-6 rounded-full bg-saffron-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <span class="text-saffron-600 text-xs font-bold">AM</span>
+        </div>
+        <div>
+          <div class="font-semibold text-gray-900 mb-1">Morning Program <span class="text-gray-400 font-normal text-xs">— Daily</span></div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Nitnem · Asa Di Vaar · Ardas · Hukamnama
+          </p>
         </div>
       </div>
 
-      <div class="flex items-start gap-4 py-3 border-b border-gray-50">
-        <div class="w-28 flex-shrink-0 font-semibold text-navy-800">Wednesday</div>
-        <div class="text-sm text-gray-600">
-          <div class="font-medium text-gray-800 mb-0.5">Midweek Kirtan</div>
-          <div class="text-gray-400">6:30 PM – 8:00 PM PT</div>
+      <div class="px-6 py-4 flex items-start gap-5">
+        <div class="w-6 h-6 rounded-full bg-navy-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <span class="text-navy-700 text-xs font-bold">PM</span>
+        </div>
+        <div>
+          <div class="font-semibold text-gray-900 mb-1">Evening Program <span class="text-gray-400 font-normal text-xs">— Daily</span></div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Rehrass Sahib · Aarti · Kirtan · Katha · Ardas · Hukamnama · Kirtan Sohila · Samapti
+          </p>
         </div>
       </div>
 
-      <div class="flex items-start gap-4 py-3">
-        <div class="w-28 flex-shrink-0 font-semibold text-navy-800">Special Events</div>
-        <div class="text-sm text-gray-600">
-          <div class="font-medium text-gray-800 mb-0.5">Gurpurabs, Akhand Path, and major celebrations</div>
-          <div class="text-gray-400">Times vary — check the <a href="schedule/" class="text-saffron-600 hover:underline">weekly schedule</a>.</div>
+      <div class="px-6 py-4 flex items-start gap-5 bg-saffron-50">
+        <div class="w-6 h-6 rounded-full bg-saffron-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <span class="text-white text-xs font-bold">+</span>
+        </div>
+        <div>
+          <div class="font-semibold text-gray-900 mb-1">Wednesday &amp; Friday <span class="text-saffron-600 font-normal text-xs">— Additional program</span></div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Sukhmani Sahib · Rehrass Sahib · Kirtan · Katha · Ardas · Hukamnama · Kirtan Sohila
+          </p>
         </div>
       </div>
 
@@ -192,21 +210,18 @@
   </div>
 
   <!-- ── CHANNEL LINK ───────────────────────────────────────────────────── -->
-  <div class="text-center">
-    <p class="text-sm text-gray-500 mb-4">
-      Can't see the stream above? Open our YouTube channel directly:
-    </p>
+  <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div>
+      <p class="text-sm font-semibold text-gray-700">El Sobrante Gurdwara Sahib on YouTube</p>
+      <p class="text-xs text-gray-400 mt-0.5">Past streams and recordings are also available on the channel.</p>
+    </div>
     <a href="https://www.youtube.com/c/ElSobranteGurdwaraSahib" target="_blank" rel="noopener"
-       class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-sm">
-      <!-- YouTube logo icon -->
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M23.5 6.2a3.0 3.0 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3.0 3.0 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3.0 3.0 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3.0 3.0 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
+       class="flex-shrink-0 inline-flex items-center gap-2 bg-white border border-gray-200 hover:border-red-300 text-gray-700 hover:text-red-600 text-sm font-medium px-4 py-2 rounded-lg transition-colors shadow-sm">
+      <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
       </svg>
-      Watch on YouTube
+      Visit Channel
     </a>
-    <p class="text-xs text-gray-400 mt-3">
-      Subscribe to be notified when we go live.
-    </p>
   </div>
 
 </div>
@@ -230,11 +245,26 @@
           El Sobrante, CA 94803
         </address>
         <p class="text-sm text-gray-300 mt-2">
-          <a href="tel:(510) 223-9987" class="hover:text-saffron-400 transition-colors">(510) 223-9987</a>
+          <a href="tel:+15102239987" class="hover:text-saffron-400 transition-colors">(510) 223-9987</a><br>
+          <a href="tel:+15102231102" class="hover:text-saffron-400 transition-colors">(510) 223-1102</a>
         </p>
-        <p class="text-sm text-gray-300">
-          <a href="mailto:info@elsobrantegurdwara.org" class="hover:text-saffron-400 transition-colors">info@elsobrantegurdwara.org</a>
+        <p class="text-sm text-gray-300 mt-1">
+          <a href="mailto:info@thesikhcenter.com" class="hover:text-saffron-400 transition-colors">info@thesikhcenter.com</a>
         </p>
+        <div class="flex gap-3 mt-3">
+          <a href="https://www.youtube.com/c/ElSobranteGurdwaraSahib" target="_blank" rel="noopener"
+             class="text-gray-400 hover:text-red-400 transition-colors" aria-label="YouTube">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/sfsikhcenter" target="_blank" rel="noopener"
+             class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/>
+            </svg>
+          </a>
+        </div>
       </div>
 
       <!-- Column 2: Quick links -->
@@ -251,12 +281,16 @@
 
       <!-- Column 3: Sangat hours -->
       <div>
-        <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Sangat Hours</h3>
+        <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Daily Programs</h3>
         <p class="text-sm text-gray-300 leading-relaxed">
           Open daily 5:00 AM – 8:30 PM.<br><br>
-          <span class="text-white font-medium">Sunday Diwan</span><br>9:00 AM – 12:30 PM<br><br>
-          <span class="text-white font-medium">Wednesday Kirtan</span><br>6:30 PM – 8:00 PM<br><br>
-          Langar (free community meal) served daily to all visitors.
+          <span class="text-white font-medium">Morning — 7 days</span><br>
+          Nitnem · Asa Di Vaar · Ardas · Hukamnama<br><br>
+          <span class="text-white font-medium">Evening — 7 days</span><br>
+          Rehrass Sahib · Kirtan · Katha · Ardas<br><br>
+          <span class="text-white font-medium">Wednesday &amp; Friday</span><br>
+          Sukhmani Sahib · Rehrass Sahib · Kirtan<br><br>
+          Langar (free community meal) served daily.
         </p>
       </div>
     </div>
