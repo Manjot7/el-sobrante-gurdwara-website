@@ -6,7 +6,7 @@ SECRET_KEY = "django-insecure-el-sobrante-gurdwara-mockup-phase1-only"
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver"]
 
 INSTALLED_APPS = [
     "django.contrib.staticfiles",

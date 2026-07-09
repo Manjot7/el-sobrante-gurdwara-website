@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="https://manjot7.github.io/el-sobrante-gurdwara-website/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Schedule — El Sobrante Gurdwara Sahib</title>
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            saffron: {
+              50:  "#fff7ed",
+              100: "#ffedd5",
+              200: "#fed7aa",
+              400: "#fb923c",
+              500: "#F5821F",
+              600: "#E06910",
+              700: "#C5570A",
+            },
+            navy: {
+              700: "#1B3A6B",
+              800: "#152D54",
+              900: "#0F1F3D",
+            },
+          },
+          fontFamily: {
+            sans: ["Poppins", "ui-sans-serif", "system-ui"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts: Poppins + Noto Sans Gurmukhi for Punjabi script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Gurmukhi:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Poppins', ui-sans-serif, system-ui; }
+    .gurmukhi { font-family: 'Noto Sans Gurmukhi', 'Poppins', sans-serif; }
+  </style>
+  
+</head>
+<body class="bg-white text-gray-900 flex flex-col min-h-screen">
+
+<!-- ═══ NAVIGATION ═══════════════════════════════════════════════════════════ -->
+<nav class="bg-navy-900 text-white sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo / wordmark -->
+      <a href="./" class="flex items-center gap-3 min-w-0">
+        <span class="text-saffron-500 text-3xl leading-none flex-shrink-0">☬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-sm sm:text-base leading-tight truncate">El Sobrante Gurdwara Sahib</div>
+          <div class="text-xs text-saffron-400 leading-tight gurmukhi hidden sm:block">ਗੁਰਦੁਆਰਾ ਸਾਹਿਬ</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a href="./"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          Home
+        </a>
+        <a href="schedule/"
+           class="px-3 py-1.5 rounded-md transition-colors text-saffron-400 bg-white/5">
+          Schedule
+        </a>
+        <a href="school/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          School
+        </a>
+        <a href="livestream/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          Livestream
+        </a>
+        <a href="contact/"
+           class="ml-2 bg-saffron-500 hover:bg-saffron-600 text-white px-4 py-1.5 rounded-full transition-colors font-semibold">
+          Contact
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false"
+              class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
+        <svg id="icon-open"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-navy-900">
+    <div class="px-4 py-3 space-y-1">
+      <a href="./"          class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Home</a>
+      <a href="schedule/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 text-saffron-400">Schedule</a>
+      <a href="school/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">School</a>
+      <a href="livestream/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Livestream</a>
+      <a href="contact/"  class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ MAIN CONTENT ══════════════════════════════════════════════════════════ -->
+<main class="flex-1">
+  
+
+<!-- ── PAGE HEADER ────────────────────────────────────────────────────────── -->
+<section class="bg-navy-800 text-white py-14">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">El Sobrante Gurdwara Sahib</p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Weekly Schedule</h1>
+    <p class="text-gray-300 text-sm">
+      All upcoming diwan, langar, school, and special events.
+      Past entries are removed automatically.
+    </p>
+  </div>
+</section>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+
+  <!-- ── CATEGORY LEGEND ─────────────────────────────────────────────────── -->
+  <div class="flex flex-wrap items-center gap-3 mb-8">
+    <span class="text-xs text-gray-400 font-semibold uppercase tracking-wide mr-1">Categories:</span>
+    <span class="inline-flex items-center gap-1.5 text-xs bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full font-medium">
+      <span class="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block"></span> Diwan
+    </span>
+    <span class="inline-flex items-center gap-1.5 text-xs bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-full font-medium">
+      <span class="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block"></span> Langar
+    </span>
+    <span class="inline-flex items-center gap-1.5 text-xs bg-green-50 text-green-700 border border-green-200 px-3 py-1 rounded-full font-medium">
+      <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span> School
+    </span>
+    <span class="inline-flex items-center gap-1.5 text-xs bg-saffron-50 text-saffron-700 border border-saffron-200 px-3 py-1 rounded-full font-semibold">
+      ★ Special Event
+    </span>
+  </div>
+
+  
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       DESKTOP TABLE  (hidden on screens smaller than md)
+       ════════════════════════════════════════════════════════════════════════ -->
+  <div class="hidden md:block rounded-xl border border-gray-100 overflow-hidden shadow-sm">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 border-b border-gray-100">
+        <tr>
+          <th class="text-left py-3 px-5 font-semibold text-gray-500 text-xs uppercase tracking-wide w-44">Date</th>
+          <th class="text-left py-3 px-4 font-semibold text-gray-500 text-xs uppercase tracking-wide w-40">Time</th>
+          <th class="text-left py-3 px-4 font-semibold text-gray-500 text-xs uppercase tracking-wide">Event</th>
+          <th class="text-left py-3 px-4 font-semibold text-gray-500 text-xs uppercase tracking-wide w-40">Location</th>
+          <th class="text-left py-3 px-5 font-semibold text-gray-500 text-xs uppercase tracking-wide w-32">Category</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-50">
+        
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+          <!-- Date cell spans all rows for this day -->
+          <td class="py-4 px-5 align-top" rowspan="1">
+            <div class="font-bold text-navy-800">Thursday</div>
+            <div class="text-xs text-gray-400 mt-0.5">Jul 9, 2026</div>
+          </td>
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            6:30 PM
+            
+            <span class="text-gray-400"> – 8:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Midweek Nitnem &amp; Kirtan</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Short evening prayer and kirtan session. All are welcome.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Main Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+            
+          </td>
+        </tr>
+        
+        
+        
+        <tr class="bg-saffron-50 hover:bg-saffron-100 transition-colors">
+
+          
+          <!-- Date cell spans all rows for this day -->
+          <td class="py-4 px-5 align-top" rowspan="2">
+            <div class="font-bold text-navy-800">Saturday</div>
+            <div class="text-xs text-gray-400 mt-0.5">Jul 11, 2026</div>
+          </td>
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            8:00 AM
+            
+            <span class="text-gray-400"> – 1:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <span class="text-saffron-500 mt-px flex-shrink-0">★</span>
+              
+              <div>
+                <div class="font-semibold text-gray-900">Gurpurab — Guru Hargobind Sahib Ji</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Akhand Path Bhog, kirtan, ardas, and hukamnama. Please join us to celebrate Guru Hargobind Sahib Ji&#x27;s Gurgaddi Diwas.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Main Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-saffron-50 text-saffron-700 text-xs px-2.5 py-0.5 rounded-full border border-saffron-200 font-semibold">Special</span>
+            
+          </td>
+        </tr>
+        
+        <tr class="bg-saffron-50 hover:bg-saffron-100 transition-colors">
+
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            1:00 PM
+            
+            <span class="text-gray-400"> – 3:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <span class="text-saffron-500 mt-px flex-shrink-0">★</span>
+              
+              <div>
+                <div class="font-semibold text-gray-900">Special Langar</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Extended langar served in celebration of Gurpurab. All sangat welcome.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Langar Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-amber-50 text-amber-700 text-xs px-2.5 py-0.5 rounded-full border border-amber-100 font-medium">Langar</span>
+            
+          </td>
+        </tr>
+        
+        
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+          <!-- Date cell spans all rows for this day -->
+          <td class="py-4 px-5 align-top" rowspan="4">
+            <div class="font-bold text-navy-800">Monday</div>
+            <div class="text-xs text-gray-400 mt-0.5">Jul 13, 2026</div>
+          </td>
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            9:00 AM
+            
+            <span class="text-gray-400"> – 10:30 AM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Asa Di Var</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Morning prayer — Asa Di Var paath and kirtan.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Main Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+            
+          </td>
+        </tr>
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            10:00 AM
+            
+            <span class="text-gray-400"> – 12:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Khalsa School</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Punjabi language, Gurmukhi script, and Sikh history for ages 5–14.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Classroom (Room 2)</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-green-50 text-green-700 text-xs px-2.5 py-0.5 rounded-full border border-green-100 font-medium">School</span>
+            
+          </td>
+        </tr>
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            10:30 AM
+            
+            <span class="text-gray-400"> – 12:30 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Sunday Diwan</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Katha, ardas, and hukamnama.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Main Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+            
+          </td>
+        </tr>
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            12:30 PM
+            
+            <span class="text-gray-400"> – 2:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Langar Seva</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Community kitchen — free meal served to all visitors.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Langar Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-amber-50 text-amber-700 text-xs px-2.5 py-0.5 rounded-full border border-amber-100 font-medium">Langar</span>
+            
+          </td>
+        </tr>
+        
+        
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+          <!-- Date cell spans all rows for this day -->
+          <td class="py-4 px-5 align-top" rowspan="1">
+            <div class="font-bold text-navy-800">Thursday</div>
+            <div class="text-xs text-gray-400 mt-0.5">Jul 16, 2026</div>
+          </td>
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            6:30 PM
+            
+            <span class="text-gray-400"> – 8:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Midweek Nitnem &amp; Kirtan</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Short evening prayer and kirtan session.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Main Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+            
+          </td>
+        </tr>
+        
+        
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+          <!-- Date cell spans all rows for this day -->
+          <td class="py-4 px-5 align-top" rowspan="4">
+            <div class="font-bold text-navy-800">Monday</div>
+            <div class="text-xs text-gray-400 mt-0.5">Jul 20, 2026</div>
+          </td>
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            9:00 AM
+            
+            <span class="text-gray-400"> – 10:30 AM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Asa Di Var</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Morning prayer — Asa Di Var paath and kirtan.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Main Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+            
+          </td>
+        </tr>
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            10:00 AM
+            
+            <span class="text-gray-400"> – 12:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Khalsa School</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Punjabi language, Gurmukhi script, and Sikh history for ages 5–14.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Classroom (Room 2)</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-green-50 text-green-700 text-xs px-2.5 py-0.5 rounded-full border border-green-100 font-medium">School</span>
+            
+          </td>
+        </tr>
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            10:30 AM
+            
+            <span class="text-gray-400"> – 12:30 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Sunday Diwan</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Katha, ardas, and hukamnama.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Main Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+            
+          </td>
+        </tr>
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            12:30 PM
+            
+            <span class="text-gray-400"> – 2:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Langar Seva</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Community kitchen — free meal served to all visitors.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Langar Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-amber-50 text-amber-700 text-xs px-2.5 py-0.5 rounded-full border border-amber-100 font-medium">Langar</span>
+            
+          </td>
+        </tr>
+        
+        
+        
+        <tr class="bg-white hover:bg-gray-50 transition-colors">
+
+          
+          <!-- Date cell spans all rows for this day -->
+          <td class="py-4 px-5 align-top" rowspan="1">
+            <div class="font-bold text-navy-800">Thursday</div>
+            <div class="text-xs text-gray-400 mt-0.5">Jul 23, 2026</div>
+          </td>
+          
+
+          <td class="py-4 px-4 align-top text-gray-600 whitespace-nowrap">
+            6:30 PM
+            
+            <span class="text-gray-400"> – 8:00 PM</span>
+            
+          </td>
+
+          <td class="py-4 px-4 align-top">
+            <div class="flex items-start gap-2">
+              
+              <div>
+                <div class="font-semibold text-gray-900">Midweek Nitnem &amp; Kirtan</div>
+                
+                <div class="text-xs text-gray-400 mt-0.5 leading-snug">Short evening prayer and kirtan session.</div>
+                
+              </div>
+            </div>
+          </td>
+
+          <td class="py-4 px-4 align-top text-xs text-gray-500">Main Hall</td>
+
+          <td class="py-4 px-5 align-top">
+            
+            <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+            
+          </td>
+        </tr>
+        
+        
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       MOBILE STACKED DAY-CARDS  (hidden on md and above)
+       This is a distinct layout, not just a responsive reflow of the table.
+       Each day gets a header card; entries stack beneath it.
+       ════════════════════════════════════════════════════════════════════════ -->
+  <div class="md:hidden space-y-6">
+    
+
+    <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
+
+      <!-- Day header -->
+      <div class="bg-navy-800 text-white px-4 py-3 flex items-center justify-between">
+        <span class="font-bold text-base">Thursday</span>
+        <span class="text-sm text-gray-300">Jul 9, 2026</span>
+      </div>
+
+      <!-- Entry cards for this day -->
+      <div class="divide-y divide-gray-50 bg-white">
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 6:30 PM – 8:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Midweek Nitnem &amp; Kirtan
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Main Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Short evening prayer and kirtan session. All are welcome.
+          </div>
+          
+
+        </div>
+        
+      </div>
+
+    </div>
+    
+
+    <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
+
+      <!-- Day header -->
+      <div class="bg-navy-800 text-white px-4 py-3 flex items-center justify-between">
+        <span class="font-bold text-base">Saturday</span>
+        <span class="text-sm text-gray-300">Jul 11, 2026</span>
+      </div>
+
+      <!-- Entry cards for this day -->
+      <div class="divide-y divide-gray-50 bg-white">
+        
+        <div class="p-4 bg-saffron-50">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 8:00 AM – 1:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-saffron-500 text-white text-xs px-2.5 py-0.5 rounded-full font-semibold">★ Special</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            <span class="text-saffron-500 flex-shrink-0">★</span>
+            Gurpurab — Guru Hargobind Sahib Ji
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Main Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Akhand Path Bhog, kirtan, ardas, and hukamnama. Please join us to celebrate Guru Hargobind Sahib Ji&#x27;s Gurgaddi Diwas.
+          </div>
+          
+
+        </div>
+        
+        <div class="p-4 bg-saffron-50">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 1:00 PM – 3:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-saffron-500 text-white text-xs px-2.5 py-0.5 rounded-full font-semibold">★ Special</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            <span class="text-saffron-500 flex-shrink-0">★</span>
+            Special Langar
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Langar Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Extended langar served in celebration of Gurpurab. All sangat welcome.
+          </div>
+          
+
+        </div>
+        
+      </div>
+
+    </div>
+    
+
+    <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
+
+      <!-- Day header -->
+      <div class="bg-navy-800 text-white px-4 py-3 flex items-center justify-between">
+        <span class="font-bold text-base">Monday</span>
+        <span class="text-sm text-gray-300">Jul 13, 2026</span>
+      </div>
+
+      <!-- Entry cards for this day -->
+      <div class="divide-y divide-gray-50 bg-white">
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 9:00 AM – 10:30 AM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Asa Di Var
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Main Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Morning prayer — Asa Di Var paath and kirtan.
+          </div>
+          
+
+        </div>
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 10:00 AM – 12:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-green-50 text-green-700 text-xs px-2.5 py-0.5 rounded-full border border-green-100 font-medium">School</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Khalsa School
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Classroom (Room 2)</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Punjabi language, Gurmukhi script, and Sikh history for ages 5–14.
+          </div>
+          
+
+        </div>
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 10:30 AM – 12:30 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Sunday Diwan
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Main Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Katha, ardas, and hukamnama.
+          </div>
+          
+
+        </div>
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 12:30 PM – 2:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-amber-50 text-amber-700 text-xs px-2.5 py-0.5 rounded-full border border-amber-100 font-medium">Langar</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Langar Seva
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Langar Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Community kitchen — free meal served to all visitors.
+          </div>
+          
+
+        </div>
+        
+      </div>
+
+    </div>
+    
+
+    <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
+
+      <!-- Day header -->
+      <div class="bg-navy-800 text-white px-4 py-3 flex items-center justify-between">
+        <span class="font-bold text-base">Thursday</span>
+        <span class="text-sm text-gray-300">Jul 16, 2026</span>
+      </div>
+
+      <!-- Entry cards for this day -->
+      <div class="divide-y divide-gray-50 bg-white">
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 6:30 PM – 8:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Midweek Nitnem &amp; Kirtan
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Main Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Short evening prayer and kirtan session.
+          </div>
+          
+
+        </div>
+        
+      </div>
+
+    </div>
+    
+
+    <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
+
+      <!-- Day header -->
+      <div class="bg-navy-800 text-white px-4 py-3 flex items-center justify-between">
+        <span class="font-bold text-base">Monday</span>
+        <span class="text-sm text-gray-300">Jul 20, 2026</span>
+      </div>
+
+      <!-- Entry cards for this day -->
+      <div class="divide-y divide-gray-50 bg-white">
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 9:00 AM – 10:30 AM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Asa Di Var
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Main Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Morning prayer — Asa Di Var paath and kirtan.
+          </div>
+          
+
+        </div>
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 10:00 AM – 12:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-green-50 text-green-700 text-xs px-2.5 py-0.5 rounded-full border border-green-100 font-medium">School</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Khalsa School
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Classroom (Room 2)</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Punjabi language, Gurmukhi script, and Sikh history for ages 5–14.
+          </div>
+          
+
+        </div>
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 10:30 AM – 12:30 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Sunday Diwan
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Main Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Katha, ardas, and hukamnama.
+          </div>
+          
+
+        </div>
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 12:30 PM – 2:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-amber-50 text-amber-700 text-xs px-2.5 py-0.5 rounded-full border border-amber-100 font-medium">Langar</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Langar Seva
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Langar Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Community kitchen — free meal served to all visitors.
+          </div>
+          
+
+        </div>
+        
+      </div>
+
+    </div>
+    
+
+    <div class="rounded-xl overflow-hidden shadow-sm border border-gray-100">
+
+      <!-- Day header -->
+      <div class="bg-navy-800 text-white px-4 py-3 flex items-center justify-between">
+        <span class="font-bold text-base">Thursday</span>
+        <span class="text-sm text-gray-300">Jul 23, 2026</span>
+      </div>
+
+      <!-- Entry cards for this day -->
+      <div class="divide-y divide-gray-50 bg-white">
+        
+        <div class="p-4 ">
+
+          <!-- Top row: time + category badge -->
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="text-xs font-semibold text-gray-500">
+              🕐 6:30 PM – 8:00 PM
+            </div>
+            <div class="flex-shrink-0">
+              
+              <span class="inline-block bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full border border-blue-100 font-medium">Diwan</span>
+              
+            </div>
+          </div>
+
+          <!-- Event title -->
+          <div class="font-semibold text-gray-900 mb-1 flex items-start gap-1.5">
+            
+            Midweek Nitnem &amp; Kirtan
+          </div>
+
+          <!-- Location -->
+          <div class="text-xs text-gray-400 mb-1">📍 Main Hall</div>
+
+          <!-- Notes -->
+          
+          <div class="text-xs text-gray-500 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100">
+            Short evening prayer and kirtan session.
+          </div>
+          
+
+        </div>
+        
+      </div>
+
+    </div>
+    
+  </div>
+
+  <!-- ── FOOT NOTE ───────────────────────────────────────────────────────── -->
+  <p class="text-xs text-gray-400 mt-8 text-center">
+    Schedule updated weekly. Past entries are removed automatically.
+    Contact us at <a href="mailto:info@elsobrantegurdwara.org" class="text-saffron-600 hover:underline">info@elsobrantegurdwara.org</a> for questions.
+  </p>
+
+  
+
+</div>
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="bg-navy-900 text-white mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+      <!-- Column 1: Identity & contact -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-saffron-500 text-2xl">☬</span>
+          <span class="font-bold text-lg leading-tight">El Sobrante Gurdwara Sahib</span>
+        </div>
+        <address class="not-italic text-gray-300 text-sm leading-relaxed">
+          14535 San Pablo Ave<br>
+          El Sobrante, CA 94803
+        </address>
+        <p class="text-sm text-gray-300 mt-2">
+          <a href="tel:(510) 555-0147" class="hover:text-saffron-400 transition-colors">(510) 555-0147</a>
+        </p>
+        <p class="text-sm text-gray-300">
+          <a href="mailto:info@elsobrantegurdwara.org" class="hover:text-saffron-400 transition-colors">info@elsobrantegurdwara.org</a>
+        </p>
+      </div>
+
+      <!-- Column 2: Quick links -->
+      <div>
+        <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Quick Links</h3>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><a href="./"            class="hover:text-white transition-colors">Home &amp; About</a></li>
+          <li><a href="schedule/"   class="hover:text-white transition-colors">Weekly Schedule</a></li>
+          <li><a href="school/"     class="hover:text-white transition-colors">Khalsa School</a></li>
+          <li><a href="livestream/" class="hover:text-white transition-colors">Livestream</a></li>
+          <li><a href="contact/"    class="hover:text-white transition-colors">Contact &amp; Directions</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Sangat hours -->
+      <div>
+        <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Sangat Hours</h3>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          Gurdwara Sahib is open daily.<br><br>
+          <span class="text-white font-medium">Sunday Diwan</span><br>9:00 AM – 12:30 PM<br><br>
+          <span class="text-white font-medium">Wednesday Kirtan</span><br>6:30 PM – 8:00 PM<br><br>
+          Langar (free community meal) served after Sunday Diwan.
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 text-center">
+      <p class="text-saffron-400 font-medium gurmukhi">ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ, ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਹਿ</p>
+      <p class="text-gray-500 text-xs mt-1">Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh</p>
+      <p class="text-gray-600 text-xs mt-4">© 2026 El Sobrante Gurdwara Sahib. All are welcome.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const btn  = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen  = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
+
+  btn.addEventListener("click", () => {
+    const open = menu.classList.toggle("hidden");
+    iconOpen.classList.toggle("hidden", !open);
+    iconClose.classList.toggle("hidden", open);
+    btn.setAttribute("aria-expanded", String(!open));
+  });
+</script>
+</body>
+</html>

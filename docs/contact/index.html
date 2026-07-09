@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="https://manjot7.github.io/el-sobrante-gurdwara-website/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact &amp; Directions — El Sobrante Gurdwara Sahib</title>
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            saffron: {
+              50:  "#fff7ed",
+              100: "#ffedd5",
+              200: "#fed7aa",
+              400: "#fb923c",
+              500: "#F5821F",
+              600: "#E06910",
+              700: "#C5570A",
+            },
+            navy: {
+              700: "#1B3A6B",
+              800: "#152D54",
+              900: "#0F1F3D",
+            },
+          },
+          fontFamily: {
+            sans: ["Poppins", "ui-sans-serif", "system-ui"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts: Poppins + Noto Sans Gurmukhi for Punjabi script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Gurmukhi:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Poppins', ui-sans-serif, system-ui; }
+    .gurmukhi { font-family: 'Noto Sans Gurmukhi', 'Poppins', sans-serif; }
+  </style>
+  
+</head>
+<body class="bg-white text-gray-900 flex flex-col min-h-screen">
+
+<!-- ═══ NAVIGATION ═══════════════════════════════════════════════════════════ -->
+<nav class="bg-navy-900 text-white sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo / wordmark -->
+      <a href="./" class="flex items-center gap-3 min-w-0">
+        <span class="text-saffron-500 text-3xl leading-none flex-shrink-0">☬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-sm sm:text-base leading-tight truncate">El Sobrante Gurdwara Sahib</div>
+          <div class="text-xs text-saffron-400 leading-tight gurmukhi hidden sm:block">ਗੁਰਦੁਆਰਾ ਸਾਹਿਬ</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a href="./"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          Home
+        </a>
+        <a href="schedule/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          Schedule
+        </a>
+        <a href="school/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          School
+        </a>
+        <a href="livestream/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          Livestream
+        </a>
+        <a href="contact/"
+           class="ml-2 bg-saffron-500 hover:bg-saffron-600 text-white px-4 py-1.5 rounded-full transition-colors font-semibold">
+          Contact
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false"
+              class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
+        <svg id="icon-open"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-navy-900">
+    <div class="px-4 py-3 space-y-1">
+      <a href="./"          class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Home</a>
+      <a href="schedule/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Schedule</a>
+      <a href="school/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">School</a>
+      <a href="livestream/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Livestream</a>
+      <a href="contact/"  class="block py-2.5 px-3 rounded-lg hover:bg-white/10 text-saffron-400">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ MAIN CONTENT ══════════════════════════════════════════════════════════ -->
+<main class="flex-1">
+  
+
+<!-- ── PAGE HEADER ────────────────────────────────────────────────────────── -->
+<section class="bg-navy-800 text-white py-14">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">El Sobrante Gurdwara Sahib</p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Contact &amp; Directions</h1>
+    <p class="text-gray-300 text-sm">
+      Find us on San Pablo Ave in El Sobrante. All are welcome.
+    </p>
+  </div>
+</section>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+
+  <!-- ── CONTACT DETAILS ────────────────────────────────────────────────── -->
+  <div class="grid md:grid-cols-3 gap-6 mb-12">
+
+    <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex gap-4">
+      <div class="text-2xl flex-shrink-0">📍</div>
+      <div>
+        <h3 class="font-bold text-navy-800 mb-1">Address</h3>
+        <address class="not-italic text-sm text-gray-600 leading-relaxed">
+          El Sobrante Gurdwara Sahib<br>
+          14535 San Pablo Ave<br>
+          El Sobrante, CA 94803
+        </address>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=14535+San+Pablo+Ave+El+Sobrante+CA+94803" target="_blank" rel="noopener"
+           class="inline-block mt-3 text-xs text-saffron-600 hover:text-saffron-700 font-semibold hover:underline">
+          Open in Google Maps →
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex gap-4">
+      <div class="text-2xl flex-shrink-0">📞</div>
+      <div>
+        <h3 class="font-bold text-navy-800 mb-1">Phone</h3>
+        <a href="tel:(510) 555-0147"
+           class="text-sm text-gray-600 hover:text-saffron-600 transition-colors">
+          (510) 555-0147
+        </a>
+        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+          Best reached on Sunday mornings (9 AM – 1 PM PT) when volunteers are present.
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex gap-4">
+      <div class="text-2xl flex-shrink-0">✉️</div>
+      <div>
+        <h3 class="font-bold text-navy-800 mb-1">Email</h3>
+        <a href="mailto:info@elsobrantegurdwara.org"
+           class="text-sm text-gray-600 hover:text-saffron-600 transition-colors break-all">
+          info@elsobrantegurdwara.org
+        </a>
+        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+          We aim to respond within a few days. For urgent matters, please call.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── FULL-SIZE MAP ───────────────────────────────────────────────────── -->
+  <!-- Static Google Maps embed — no API billing key required at basic tier.
+       Clicking opens Google Maps for turn-by-turn directions. -->
+  <div class="rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-100">
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=14535+San+Pablo+Ave+El+Sobrante+CA+94803" target="_blank" rel="noopener"
+       class="block w-full h-2 bg-saffron-500 hover:bg-saffron-600 transition-colors"></a>
+    <iframe
+      src="https://maps.google.com/maps?q=El+Sobrante+CA+94803&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      width="100%"
+      height="480"
+      style="border:0; display:block;"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="El Sobrante Gurdwara Sahib — full map">
+    </iframe>
+  </div>
+
+  <!-- Directions CTA -->
+  <div class="text-center mb-12">
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=14535+San+Pablo+Ave+El+Sobrante+CA+94803" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-8 py-3.5 rounded-xl transition-colors shadow-sm text-sm">
+      Get Turn-by-Turn Directions
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- ── GETTING HERE ────────────────────────────────────────────────────── -->
+  <div class="grid md:grid-cols-2 gap-8">
+
+    <div class="bg-gray-50 rounded-xl p-6">
+      <h3 class="font-bold text-navy-800 mb-4">Parking &amp; Access</h3>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Free on-site parking lot — enter from San Pablo Ave</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Wheelchair accessible entrance at the rear of the building</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> AC Transit bus lines 71 and 76 stop on San Pablo Ave</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Street parking available on nearby side streets on weekdays</li>
+      </ul>
+    </div>
+
+    <div class="bg-gray-50 rounded-xl p-6">
+      <h3 class="font-bold text-navy-800 mb-4">What to Expect</h3>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Head coverings required inside the Darbar Sahib (available at entry)</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Shoes removed before entering (racks provided at the entrance)</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Langar (free meal) served after Sunday Diwan — all are welcome</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> All faiths and backgrounds welcome — no prior knowledge of Sikhism needed</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="bg-navy-900 text-white mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+      <!-- Column 1: Identity & contact -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-saffron-500 text-2xl">☬</span>
+          <span class="font-bold text-lg leading-tight">El Sobrante Gurdwara Sahib</span>
+        </div>
+        <address class="not-italic text-gray-300 text-sm leading-relaxed">
+          14535 San Pablo Ave<br>
+          El Sobrante, CA 94803
+        </address>
+        <p class="text-sm text-gray-300 mt-2">
+          <a href="tel:(510) 555-0147" class="hover:text-saffron-400 transition-colors">(510) 555-0147</a>
+        </p>
+        <p class="text-sm text-gray-300">
+          <a href="mailto:info@elsobrantegurdwara.org" class="hover:text-saffron-400 transition-colors">info@elsobrantegurdwara.org</a>
+        </p>
+      </div>
+
+      <!-- Column 2: Quick links -->
+      <div>
+        <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Quick Links</h3>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><a href="./"            class="hover:text-white transition-colors">Home &amp; About</a></li>
+          <li><a href="schedule/"   class="hover:text-white transition-colors">Weekly Schedule</a></li>
+          <li><a href="school/"     class="hover:text-white transition-colors">Khalsa School</a></li>
+          <li><a href="livestream/" class="hover:text-white transition-colors">Livestream</a></li>
+          <li><a href="contact/"    class="hover:text-white transition-colors">Contact &amp; Directions</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Sangat hours -->
+      <div>
+        <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Sangat Hours</h3>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          Gurdwara Sahib is open daily.<br><br>
+          <span class="text-white font-medium">Sunday Diwan</span><br>9:00 AM – 12:30 PM<br><br>
+          <span class="text-white font-medium">Wednesday Kirtan</span><br>6:30 PM – 8:00 PM<br><br>
+          Langar (free community meal) served after Sunday Diwan.
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 text-center">
+      <p class="text-saffron-400 font-medium gurmukhi">ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ, ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਹਿ</p>
+      <p class="text-gray-500 text-xs mt-1">Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh</p>
+      <p class="text-gray-600 text-xs mt-4">© 2026 El Sobrante Gurdwara Sahib. All are welcome.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const btn  = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen  = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
+
+  btn.addEventListener("click", () => {
+    const open = menu.classList.toggle("hidden");
+    iconOpen.classList.toggle("hidden", !open);
+    iconClose.classList.toggle("hidden", open);
+    btn.setAttribute("aria-expanded", String(!open));
+  });
+</script>
+</body>
+</html>

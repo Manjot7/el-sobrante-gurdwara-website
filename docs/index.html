@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="https://manjot7.github.io/el-sobrante-gurdwara-website/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Sobrante Gurdwara Sahib — Home</title>
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            saffron: {
+              50:  "#fff7ed",
+              100: "#ffedd5",
+              200: "#fed7aa",
+              400: "#fb923c",
+              500: "#F5821F",
+              600: "#E06910",
+              700: "#C5570A",
+            },
+            navy: {
+              700: "#1B3A6B",
+              800: "#152D54",
+              900: "#0F1F3D",
+            },
+          },
+          fontFamily: {
+            sans: ["Poppins", "ui-sans-serif", "system-ui"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts: Poppins + Noto Sans Gurmukhi for Punjabi script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Gurmukhi:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Poppins', ui-sans-serif, system-ui; }
+    .gurmukhi { font-family: 'Noto Sans Gurmukhi', 'Poppins', sans-serif; }
+  </style>
+  
+</head>
+<body class="bg-white text-gray-900 flex flex-col min-h-screen">
+
+<!-- ═══ NAVIGATION ═══════════════════════════════════════════════════════════ -->
+<nav class="bg-navy-900 text-white sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo / wordmark -->
+      <a href="./" class="flex items-center gap-3 min-w-0">
+        <span class="text-saffron-500 text-3xl leading-none flex-shrink-0">☬</span>
+        <div class="min-w-0">
+          <div class="font-bold text-sm sm:text-base leading-tight truncate">El Sobrante Gurdwara Sahib</div>
+          <div class="text-xs text-saffron-400 leading-tight gurmukhi hidden sm:block">ਗੁਰਦੁਆਰਾ ਸਾਹਿਬ</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a href="./"
+           class="px-3 py-1.5 rounded-md transition-colors text-saffron-400 bg-white/5">
+          Home
+        </a>
+        <a href="schedule/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          Schedule
+        </a>
+        <a href="school/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          School
+        </a>
+        <a href="livestream/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          Livestream
+        </a>
+        <a href="contact/"
+           class="ml-2 bg-saffron-500 hover:bg-saffron-600 text-white px-4 py-1.5 rounded-full transition-colors font-semibold">
+          Contact
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false"
+              class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
+        <svg id="icon-open"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-navy-900">
+    <div class="px-4 py-3 space-y-1">
+      <a href="./"          class="block py-2.5 px-3 rounded-lg hover:bg-white/10 text-saffron-400">Home</a>
+      <a href="schedule/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Schedule</a>
+      <a href="school/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">School</a>
+      <a href="livestream/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Livestream</a>
+      <a href="contact/"  class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ MAIN CONTENT ══════════════════════════════════════════════════════════ -->
+<main class="flex-1">
+  
+
+<!-- ── HERO ────────────────────────────────────────────────────────────────── -->
+<section class="relative bg-navy-900 overflow-hidden">
+  <!-- Saffron gradient glow -->
+  <div class="absolute inset-0"
+       style="background: radial-gradient(ellipse 80% 70% at 75% 50%, rgba(245,130,31,0.18) 0%, transparent 70%),
+              linear-gradient(135deg, #0F1F3D 0%, #152D54 60%, #1B3A6B 100%);">
+  </div>
+  <!-- Subtle dot pattern -->
+  <div class="absolute inset-0 opacity-5"
+       style="background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+              background-size: 28px 28px;">
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-28 md:py-40">
+    <div class="max-w-2xl">
+      <div class="text-saffron-500 text-6xl mb-6 leading-none">☬</div>
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-3 leading-tight">
+        El Sobrante<br>
+        <span class="text-saffron-500">Gurdwara Sahib</span>
+      </h1>
+      <p class="text-2xl text-gray-300 gurmukhi mb-1">ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ</p>
+      <p class="text-base text-gray-400 mb-10">
+        Welcome to the house of the Guru — all are equal, all are welcome.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="schedule/"
+           class="bg-saffron-500 hover:bg-saffron-600 text-white font-semibold px-7 py-3 rounded-lg transition-colors shadow-lg">
+          View This Week's Schedule
+        </a>
+        <a href="livestream/"
+           class="border border-white/30 hover:border-white/60 text-white font-semibold px-7 py-3 rounded-lg transition-colors">
+          Watch Livestream
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUICK LINKS ─────────────────────────────────────────────────────────── -->
+<section class="bg-saffron-500 py-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+
+      <a href="schedule/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors group">
+        <span class="text-2xl flex-shrink-0">📅</span>
+        <div>
+          <div class="font-semibold text-sm leading-tight">Schedule</div>
+          <div class="text-xs text-white/70">Diwan · Langar · Events</div>
+        </div>
+      </a>
+
+      <a href="livestream/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors group">
+        <span class="text-2xl flex-shrink-0">📺</span>
+        <div>
+          <div class="font-semibold text-sm leading-tight">Livestream</div>
+          <div class="text-xs text-white/70">Watch on YouTube</div>
+        </div>
+      </a>
+
+      <a href="school/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors group">
+        <span class="text-2xl flex-shrink-0">🏫</span>
+        <div>
+          <div class="font-semibold text-sm leading-tight">Khalsa School</div>
+          <div class="text-xs text-white/70">Punjabi · Sikh studies</div>
+        </div>
+      </a>
+
+      <a href="contact/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors group">
+        <span class="text-2xl flex-shrink-0">📍</span>
+        <div>
+          <div class="font-semibold text-sm leading-tight">Contact &amp; Directions</div>
+          <div class="text-xs text-white/70">El Sobrante, CA</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ───────────────────────────────────────────────────────────────── -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+      <!-- Placeholder building photo -->
+      <div class="relative rounded-2xl overflow-hidden shadow-xl"
+           style="background: linear-gradient(135deg, #152D54 0%, #1B3A6B 50%, #2a4f8f 100%);
+                  min-height: 340px;">
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-white/20 gap-3">
+          <span class="text-8xl">☬</span>
+          <span class="text-sm tracking-widest uppercase">Gurdwara Building Photo</span>
+        </div>
+        <!-- Decorative saffron bar at bottom -->
+        <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-saffron-500"></div>
+      </div>
+
+      <!-- About text -->
+      <div>
+        <p class="text-saffron-600 font-semibold uppercase tracking-widest text-xs mb-3">About Us</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-6 leading-tight">
+          Serving the Sikh community<br>of the East Bay since 1984
+        </h2>
+        <div class="space-y-4 text-gray-600 leading-relaxed">
+          <p>
+            Sri Guru Singh Sabha El Sobrante was founded by a small group of Punjabi families who settled
+            in the Richmond and El Sobrante areas in the early 1980s. What began as weekly prayers in a
+            shared community hall has grown into a dedicated Gurdwara Sahib serving hundreds of families
+            from across the East Bay.
+          </p>
+          <p>
+            Our mission is rooted in the teachings of Sri Guru Granth Sahib Ji — that all people are
+            equal in the eyes of Waheguru, and all are welcome at the Gurdwara regardless of background,
+            faith, or circumstance. The langar (community kitchen) has served a free meal to every visitor
+            every Sunday since our doors first opened. No one leaves hungry.
+          </p>
+          <p>
+            Beyond Sunday diwan and weekly kirtan, the Gurdwara operates the Khalsa School, teaching
+            Punjabi language, Gurmukhi script, and Sikh history to children of the sangat — ensuring
+            the next generation stays connected to their heritage.
+          </p>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-6 text-sm">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-saffron-500">40+</div>
+            <div class="text-gray-500">Years serving<br>the sangat</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-saffron-500">500+</div>
+            <div class="text-gray-500">Families in our<br>community</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-saffron-500">Every Sunday</div>
+            <div class="text-gray-500">Free langar<br>for all</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMING UP AT A GLANCE ──────────────────────────────────────────────── -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <p class="text-saffron-600 font-semibold uppercase tracking-widest text-xs mb-1">Don't miss</p>
+        <h2 class="text-2xl font-bold text-navy-900">Coming Up</h2>
+      </div>
+      <a href="schedule/" class="text-saffron-600 hover:text-saffron-700 text-sm font-semibold transition-colors">
+        Full schedule →
+      </a>
+    </div>
+
+    
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      
+      <div class="bg-white rounded-xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-shadow">
+        
+        <!-- Category pill -->
+        
+        <span class="inline-block bg-blue-50 text-blue-700 text-xs border border-blue-100 px-2.5 py-0.5 rounded-full mb-3">Diwan</span>
+        
+        
+
+        <h3 class="font-semibold text-gray-900 mb-2">Midweek Nitnem &amp; Kirtan</h3>
+        <p class="text-xs text-gray-400 mb-0.5">
+          Thursday, July 9
+        </p>
+        <p class="text-xs text-gray-400 mb-2">
+          6:30 PM – 8:00 PM
+          · Main Hall
+        </p>
+        
+        <p class="text-xs text-gray-500 leading-relaxed border-t border-gray-50 pt-2 mt-2">Short evening prayer and kirtan session. All are welcome.</p>
+        
+      </div>
+      
+      <div class="bg-white rounded-xl border border-saffron-300 ring-1 ring-saffron-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+        
+        <span class="inline-block bg-saffron-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">
+          ★ Special Event
+        </span>
+        
+
+        <h3 class="font-semibold text-gray-900 mb-2">Gurpurab — Guru Hargobind Sahib Ji</h3>
+        <p class="text-xs text-gray-400 mb-0.5">
+          Saturday, July 11
+        </p>
+        <p class="text-xs text-gray-400 mb-2">
+          8:00 AM – 1:00 PM
+          · Main Hall
+        </p>
+        
+        <p class="text-xs text-gray-500 leading-relaxed border-t border-gray-50 pt-2 mt-2">Akhand Path Bhog, kirtan, ardas, and hukamnama. Please join us to celebrate Guru Hargobind Sahib Ji&#x27;s Gurgaddi Diwas.</p>
+        
+      </div>
+      
+      <div class="bg-white rounded-xl border border-saffron-300 ring-1 ring-saffron-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+        
+        <span class="inline-block bg-saffron-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">
+          ★ Special Event
+        </span>
+        
+
+        <h3 class="font-semibold text-gray-900 mb-2">Special Langar</h3>
+        <p class="text-xs text-gray-400 mb-0.5">
+          Saturday, July 11
+        </p>
+        <p class="text-xs text-gray-400 mb-2">
+          1:00 PM – 3:00 PM
+          · Langar Hall
+        </p>
+        
+        <p class="text-xs text-gray-500 leading-relaxed border-t border-gray-50 pt-2 mt-2">Extended langar served in celebration of Gurpurab. All sangat welcome.</p>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+<!-- ── MINI MAP ────────────────────────────────────────────────────────────── -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+
+      <div>
+        <p class="text-saffron-600 font-semibold uppercase tracking-widest text-xs mb-2">Visit Us</p>
+        <h2 class="text-2xl font-bold text-navy-900 mb-4">Find the Gurdwara</h2>
+        <address class="not-italic text-gray-600 mb-4 leading-relaxed">
+          <strong class="text-navy-800 font-semibold">El Sobrante Gurdwara Sahib</strong><br>
+          14535 San Pablo Ave<br>
+          El Sobrante, CA 94803
+        </address>
+        <p class="text-sm text-gray-500 mb-6">
+          Easily accessible from I-80 via San Pablo Ave exit. Free parking available on-site.
+          Wheelchair accessible entrance at rear of building.
+        </p>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=14535+San+Pablo+Ave+El+Sobrante+CA+94803" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-sm">
+          Get Directions
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Static Google Maps embed — no API key required at basic tier -->
+      <div class="rounded-xl overflow-hidden shadow-lg h-64">
+        <iframe
+          src="https://maps.google.com/maps?q=El+Sobrante+CA+94803&t=&z=14&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="El Sobrante Gurdwara Sahib location map">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="bg-navy-900 text-white mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+      <!-- Column 1: Identity & contact -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-saffron-500 text-2xl">☬</span>
+          <span class="font-bold text-lg leading-tight">El Sobrante Gurdwara Sahib</span>
+        </div>
+        <address class="not-italic text-gray-300 text-sm leading-relaxed">
+          14535 San Pablo Ave<br>
+          El Sobrante, CA 94803
+        </address>
+        <p class="text-sm text-gray-300 mt-2">
+          <a href="tel:(510) 555-0147" class="hover:text-saffron-400 transition-colors">(510) 555-0147</a>
+        </p>
+        <p class="text-sm text-gray-300">
+          <a href="mailto:info@elsobrantegurdwara.org" class="hover:text-saffron-400 transition-colors">info@elsobrantegurdwara.org</a>
+        </p>
+      </div>
+
+      <!-- Column 2: Quick links -->
+      <div>
+        <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Quick Links</h3>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><a href="./"            class="hover:text-white transition-colors">Home &amp; About</a></li>
+          <li><a href="schedule/"   class="hover:text-white transition-colors">Weekly Schedule</a></li>
+          <li><a href="school/"     class="hover:text-white transition-colors">Khalsa School</a></li>
+          <li><a href="livestream/" class="hover:text-white transition-colors">Livestream</a></li>
+          <li><a href="contact/"    class="hover:text-white transition-colors">Contact &amp; Directions</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Sangat hours -->
+      <div>
+        <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Sangat Hours</h3>
+        <p class="text-sm text-gray-300 leading-relaxed">
+          Gurdwara Sahib is open daily.<br><br>
+          <span class="text-white font-medium">Sunday Diwan</span><br>9:00 AM – 12:30 PM<br><br>
+          <span class="text-white font-medium">Wednesday Kirtan</span><br>6:30 PM – 8:00 PM<br><br>
+          Langar (free community meal) served after Sunday Diwan.
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 text-center">
+      <p class="text-saffron-400 font-medium gurmukhi">ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ, ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਹਿ</p>
+      <p class="text-gray-500 text-xs mt-1">Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh</p>
+      <p class="text-gray-600 text-xs mt-4">© 2026 El Sobrante Gurdwara Sahib. All are welcome.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const btn  = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen  = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
+
+  btn.addEventListener("click", () => {
+    const open = menu.classList.toggle("hidden");
+    iconOpen.classList.toggle("hidden", !open);
+    iconClose.classList.toggle("hidden", open);
+    btn.setAttribute("aria-expanded", String(!open));
+  });
+</script>
+</body>
+</html>
