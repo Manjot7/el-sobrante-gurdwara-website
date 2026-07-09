@@ -22,8 +22,11 @@ GURDWARA_INFO = {
     "address_line2": "El Sobrante, CA 94803",
     "phone": "(510) 223-9987",
     "email": "info@elsobrantegurdwara.org",
-    "youtube_channel_url": "https://www.youtube.com/@ElSobraunteGurdwaraSahib",
-    # Placeholder channel ID — replace with real ID when known
+    "youtube_channel_url": "https://www.youtube.com/c/ElSobranteGurdwaraSahib",
+    # Channel ID (UC...) needed for the live stream iframe embed.
+    # To find it: open youtube.com/c/ElSobranteGurdwaraSahib in a browser,
+    # right-click → View Page Source, search for "UC" — it's a 24-char string
+    # like UCxxxxxxxxxxxxxxxxxxxxxxxxx. Replace the value below.
     "youtube_channel_id": "PLACEHOLDER_CHANNEL_ID",
     "maps_directions_url": (
         "https://www.google.com/maps/search/?api=1"
