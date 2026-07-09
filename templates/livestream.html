@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Livestream — El Sobrante Gurdwara Sahib{% endblock %}
+
+{% block content %}
+
+<!-- ── PAGE HEADER ────────────────────────────────────────────────────────── -->
+<section class="bg-navy-800 text-white py-14">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">El Sobrante Gurdwara Sahib</p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Livestream</h1>
+    <p class="text-gray-300 text-sm">
+      Watch Sunday diwan and special events live on YouTube — no account needed.
+    </p>
+  </div>
+</section>
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+
+  <!-- ── YOUTUBE EMBED ───────────────────────────────────────────────────── -->
+  <!-- Static iframe pointing at the channel's live tab.
+       YouTube shows its own "offline" state when nothing is streaming —
+       no API key, no custom logic, nothing to maintain. -->
+  <div class="rounded-2xl overflow-hidden shadow-2xl bg-black mb-8">
+    <div class="relative w-full" style="padding-bottom: 56.25%;">
+      <iframe
+        class="absolute inset-0 w-full h-full"
+        src="https://www.youtube.com/embed/live_stream?channel={{ gurdwara.youtube_channel_id }}&autoplay=0"
+        title="El Sobrante Gurdwara Sahib — Live Stream"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- ── STATUS NOTE ────────────────────────────────────────────────────── -->
+  <div class="flex flex-col sm:flex-row gap-4 mb-10">
+    <div class="flex-1 bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-800">
+      <strong class="block mb-1">🔴 When we're live</strong>
+      The player above will show the live stream automatically. No refresh needed.
+    </div>
+    <div class="flex-1 bg-gray-50 border border-gray-100 rounded-xl p-4 text-sm text-gray-600">
+      <strong class="block mb-1 text-gray-700">📴 When we're offline</strong>
+      YouTube shows an "offline" or "no upcoming live streams" screen — the Gurdwara is not currently streaming.
+    </div>
+  </div>
+
+  <!-- ── STREAMING SCHEDULE ─────────────────────────────────────────────── -->
+  <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm mb-8">
+    <h2 class="text-lg font-bold text-navy-900 mb-4">Regular Streaming Days</h2>
+    <div class="space-y-3">
+
+      <div class="flex items-start gap-4 py-3 border-b border-gray-50">
+        <div class="w-28 flex-shrink-0 font-semibold text-navy-800">Sunday</div>
+        <div class="text-sm text-gray-600">
+          <div class="font-medium text-gray-800 mb-0.5">Asa Di Var &amp; Sunday Diwan</div>
+          <div class="text-gray-400">9:00 AM – 12:30 PM PT</div>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 py-3 border-b border-gray-50">
+        <div class="w-28 flex-shrink-0 font-semibold text-navy-800">Wednesday</div>
+        <div class="text-sm text-gray-600">
+          <div class="font-medium text-gray-800 mb-0.5">Midweek Kirtan</div>
+          <div class="text-gray-400">6:30 PM – 8:00 PM PT</div>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 py-3">
+        <div class="w-28 flex-shrink-0 font-semibold text-navy-800">Special Events</div>
+        <div class="text-sm text-gray-600">
+          <div class="font-medium text-gray-800 mb-0.5">Gurpurabs, Akhand Path, and major celebrations</div>
+          <div class="text-gray-400">Times vary — check the <a href="/schedule/" class="text-saffron-600 hover:underline">weekly schedule</a>.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── CHANNEL LINK ───────────────────────────────────────────────────── -->
+  <div class="text-center">
+    <p class="text-sm text-gray-500 mb-4">
+      Can't see the stream above? Open our YouTube channel directly:
+    </p>
+    <a href="{{ gurdwara.youtube_channel_url }}" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-sm">
+      <!-- YouTube logo icon -->
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M23.5 6.2a3.0 3.0 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3.0 3.0 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3.0 3.0 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3.0 3.0 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
+      </svg>
+      Watch on YouTube
+    </a>
+    <p class="text-xs text-gray-400 mt-3">
+      Subscribe to be notified when we go live.
+    </p>
+  </div>
+
+</div>
+
+{% endblock %}

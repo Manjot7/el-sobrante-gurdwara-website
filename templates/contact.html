@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Contact &amp; Directions — El Sobrante Gurdwara Sahib{% endblock %}
+
+{% block content %}
+
+<!-- ── PAGE HEADER ────────────────────────────────────────────────────────── -->
+<section class="bg-navy-800 text-white py-14">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">El Sobrante Gurdwara Sahib</p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Contact &amp; Directions</h1>
+    <p class="text-gray-300 text-sm">
+      Find us on San Pablo Ave in El Sobrante. All are welcome.
+    </p>
+  </div>
+</section>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+
+  <!-- ── CONTACT DETAILS ────────────────────────────────────────────────── -->
+  <div class="grid md:grid-cols-3 gap-6 mb-12">
+
+    <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex gap-4">
+      <div class="text-2xl flex-shrink-0">📍</div>
+      <div>
+        <h3 class="font-bold text-navy-800 mb-1">Address</h3>
+        <address class="not-italic text-sm text-gray-600 leading-relaxed">
+          El Sobrante Gurdwara Sahib<br>
+          {{ gurdwara.address_line1 }}<br>
+          {{ gurdwara.address_line2 }}
+        </address>
+        <a href="{{ gurdwara.maps_directions_url }}" target="_blank" rel="noopener"
+           class="inline-block mt-3 text-xs text-saffron-600 hover:text-saffron-700 font-semibold hover:underline">
+          Open in Google Maps →
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex gap-4">
+      <div class="text-2xl flex-shrink-0">📞</div>
+      <div>
+        <h3 class="font-bold text-navy-800 mb-1">Phone</h3>
+        <a href="tel:{{ gurdwara.phone }}"
+           class="text-sm text-gray-600 hover:text-saffron-600 transition-colors">
+          {{ gurdwara.phone }}
+        </a>
+        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+          Best reached on Sunday mornings (9 AM – 1 PM PT) when volunteers are present.
+        </p>
+      </div>
+    </div>
+
+    <div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex gap-4">
+      <div class="text-2xl flex-shrink-0">✉️</div>
+      <div>
+        <h3 class="font-bold text-navy-800 mb-1">Email</h3>
+        <a href="mailto:{{ gurdwara.email }}"
+           class="text-sm text-gray-600 hover:text-saffron-600 transition-colors break-all">
+          {{ gurdwara.email }}
+        </a>
+        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+          We aim to respond within a few days. For urgent matters, please call.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── FULL-SIZE MAP ───────────────────────────────────────────────────── -->
+  <!-- Static Google Maps embed — no API billing key required at basic tier.
+       Clicking opens Google Maps for turn-by-turn directions. -->
+  <div class="rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-100">
+    <a href="{{ gurdwara.maps_directions_url }}" target="_blank" rel="noopener"
+       class="block w-full h-2 bg-saffron-500 hover:bg-saffron-600 transition-colors"></a>
+    <iframe
+      src="https://maps.google.com/maps?q=El+Sobrante+CA+94803&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      width="100%"
+      height="480"
+      style="border:0; display:block;"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="El Sobrante Gurdwara Sahib — full map">
+    </iframe>
+  </div>
+
+  <!-- Directions CTA -->
+  <div class="text-center mb-12">
+    <a href="{{ gurdwara.maps_directions_url }}" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-8 py-3.5 rounded-xl transition-colors shadow-sm text-sm">
+      Get Turn-by-Turn Directions
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- ── GETTING HERE ────────────────────────────────────────────────────── -->
+  <div class="grid md:grid-cols-2 gap-8">
+
+    <div class="bg-gray-50 rounded-xl p-6">
+      <h3 class="font-bold text-navy-800 mb-4">Parking &amp; Access</h3>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Free on-site parking lot — enter from San Pablo Ave</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Wheelchair accessible entrance at the rear of the building</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> AC Transit bus lines 71 and 76 stop on San Pablo Ave</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Street parking available on nearby side streets on weekdays</li>
+      </ul>
+    </div>
+
+    <div class="bg-gray-50 rounded-xl p-6">
+      <h3 class="font-bold text-navy-800 mb-4">What to Expect</h3>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Head coverings required inside the Darbar Sahib (available at entry)</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Shoes removed before entering (racks provided at the entrance)</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Langar (free meal) served after Sunday Diwan — all are welcome</li>
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> All faiths and backgrounds welcome — no prior knowledge of Sikhism needed</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
