@@ -18,16 +18,16 @@ from datetime import date, time
 
 GURDWARA_INFO = {
     "name": "El Sobrante Gurdwara Sahib",
-    "address_line1": "14535 San Pablo Ave",
+    "address_line1": "3550 Hillcrest Rd",
     "address_line2": "El Sobrante, CA 94803",
-    "phone": "(510) 555-0147",
+    "phone": "(510) 223-9987",
     "email": "info@elsobrantegurdwara.org",
     "youtube_channel_url": "https://www.youtube.com/@ElSobraunteGurdwaraSahib",
     # Placeholder channel ID — replace with real ID when known
     "youtube_channel_id": "PLACEHOLDER_CHANNEL_ID",
     "maps_directions_url": (
         "https://www.google.com/maps/search/?api=1"
-        "&query=14535+San+Pablo+Ave+El+Sobrante+CA+94803"
+        "&query=3550+Hillcrest+Rd+El+Sobrante+CA+94803"
     ),
 }
 
