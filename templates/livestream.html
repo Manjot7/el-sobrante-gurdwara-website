@@ -16,37 +16,28 @@
 
 <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
 
-  <!-- ── WATCH LIVE PANEL ───────────────────────────────────────────────── -->
-  <!-- YouTube's live_stream?channel= embed format is no longer supported.
-       Visitors are linked directly to the channel's live tab instead. -->
-  <div class="rounded-2xl overflow-hidden shadow-xl bg-navy-900 mb-8">
-    <div class="relative w-full flex flex-col items-center justify-center text-white text-center px-6 py-16"
-         style="background: linear-gradient(135deg, #0F1F3D 0%, #1B3A6B 60%, #152D54 100%);">
-      <!-- Decorative glow -->
-      <div class="absolute inset-0 opacity-20"
-           style="background: radial-gradient(ellipse at 50% 50%, #F5821F 0%, transparent 70%)"></div>
-      <div class="relative z-10">
-        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg">
-          <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        </div>
-        <h2 class="text-2xl font-bold mb-2">Watch Live on YouTube</h2>
-        <p class="text-gray-300 text-sm mb-6 max-w-md">
-          Daily diwan is streamed live every morning and evening. Click below to open the channel on YouTube.
-        </p>
-        <a href="{{ gurdwara.youtube_channel_url }}/live" target="_blank" rel="noopener"
-           class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3.5 rounded-xl transition-colors shadow-lg text-base">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
-          </svg>
-          Open Live Stream
-        </a>
-        <p class="text-gray-500 text-xs mt-4">
-          Opens YouTube in a new tab. Subscribe to get notified when diwan begins.
-        </p>
-      </div>
+  <!-- ── YOUTUBE EMBED ─────────────────────────────────────────────────── -->
+  <div class="rounded-2xl overflow-hidden shadow-2xl bg-black mb-4">
+    <div class="relative w-full" style="padding-bottom: 56.25%;">
+      <iframe
+        class="absolute inset-0 w-full h-full"
+        src="https://www.youtube.com/embed/{{ gurdwara.youtube_live_video_id }}?autoplay=0&rel=0"
+        title="El Sobrante Gurdwara Sahib — Live Stream"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
     </div>
+  </div>
+  <div class="flex justify-end mb-8">
+    <a href="{{ gurdwara.youtube_channel_url }}/live" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-red-500 transition-colors">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
+      </svg>
+      Open on YouTube
+    </a>
   </div>
 
   <!-- ── DAILY PROGRAM SCHEDULE ─────────────────────────────────────────── -->

@@ -26,6 +26,7 @@ GURDWARA_INFO = {
     "website": "https://thesikhcenter.com",
     "youtube_channel_url": "https://www.youtube.com/c/ElSobranteGurdwaraSahib",
     "youtube_channel_id": "UCx1y5VenBaV9WspiK_oAnxQ",
+    "youtube_live_video_id": "Jvebt007X4M",
     "facebook_url": "https://www.facebook.com/sfsikhcenter",
     "maps_directions_url": (
         "https://www.google.com/maps/search/?api=1"
