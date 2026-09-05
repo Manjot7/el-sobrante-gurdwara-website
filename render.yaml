@@ -1,5 +1,5 @@
-# Render blueprint. With this file in the repo, Render can configure the whole
-# service itself: New → Blueprint → pick this repo.
+# Render blueprint. With this file in the repo, Render configures the whole
+# service itself: New + → Blueprint → pick this repo.
 #
 # NOTE ON THE FREE PLAN: the disk is ephemeral. Anything uploaded through the
 # admin — photos, events, edits — is wiped whenever the service redeploys or
@@ -17,9 +17,24 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.13.4"
-      - key: DJANGO_SECRET_KEY
-        generateValue: true      # Render generates a strong key
       - key: DJANGO_DEBUG
         value: "false"
       - key: WEB_CONCURRENCY
         value: "2"
+
+      # Render generates a strong random key on first deploy.
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+
+      # sync: false means "ask me for this value when creating the blueprint".
+      # Render only prompts for variables declared here, which is why these
+      # have to be listed rather than added in the dashboard afterwards.
+      #
+      # These three create the admin login (see build.sh). The password is
+      # entered into Render and stored there — it never enters this repo.
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
