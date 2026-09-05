@@ -1,76 +1,68 @@
 {% extends "base.html" %}
-{% block title %}El Sobrante Gurdwara Sahib — Home{% endblock %}
+{% block title %}{{ site.name }}{% endblock %}
 
 {% block content %}
 
-<!-- ── HERO ────────────────────────────────────────────────────────────────── -->
-<section class="relative bg-navy-900 overflow-hidden">
-  <!-- Saffron gradient glow -->
-  <div class="absolute inset-0"
-       style="background: radial-gradient(ellipse 80% 70% at 75% 50%, rgba(245,130,31,0.18) 0%, transparent 70%),
-              linear-gradient(135deg, #0F1F3D 0%, #152D54 60%, #1B3A6B 100%);">
-  </div>
-  <!-- Subtle dot pattern -->
-  <div class="absolute inset-0 opacity-5"
-       style="background-image: radial-gradient(circle, #fff 1px, transparent 1px);
-              background-size: 28px 28px;">
-  </div>
+<!-- ── HERO SLIDESHOW ──────────────────────────────────────────────────────
+     Photos only, no text overlay. Managed in the admin under
+     "Photos on the website" → "Home page slideshow".
+──────────────────────────────────────────────────────────────────────────── -->
+{% if hero_photos %}
+<section class="relative bg-navy-900 overflow-hidden" aria-label="Photos of the Gurdwara">
+  <div id="hero" class="relative w-full h-[42vh] sm:h-[55vh] lg:h-[68vh] min-h-[260px]">
+    {% for photo in hero_photos %}
+    <img src="{{ photo.image.url }}"
+         alt="{{ photo.caption }}"
+         data-hero-slide
+         class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 {% if not forloop.first %}opacity-0{% endif %}"
+         {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+    {% endfor %}
+    <!-- Keeps the sticky navy nav readable against a bright sky -->
+    <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/40 to-transparent pointer-events-none"></div>
 
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-28 md:py-40">
-    <div class="max-w-2xl">
-      <div class="text-saffron-500 text-6xl mb-6 leading-none">☬</div>
-      <h1 class="text-4xl md:text-6xl font-bold text-white mb-3 leading-tight">
-        El Sobrante<br>
-        <span class="text-saffron-500">Gurdwara Sahib</span>
-      </h1>
-      <p class="text-2xl text-gray-300 gurmukhi mb-1">ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ</p>
-      <p class="text-base text-gray-400 mb-10">
-        Welcome to the house of the Guru — all are equal, all are welcome.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <a href="/schedule/"
-           class="bg-saffron-500 hover:bg-saffron-600 text-white font-semibold px-7 py-3 rounded-lg transition-colors shadow-lg">
-          This Week's Schedule
-        </a>
-        <a href="/livestream/"
-           class="border border-white/30 hover:border-white/60 text-white font-semibold px-7 py-3 rounded-lg transition-colors">
-          Daily Livestream
-        </a>
-      </div>
+    {% if hero_photos|length > 1 %}
+    <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2" role="tablist" aria-label="Choose photo">
+      {% for photo in hero_photos %}
+      <button type="button" data-hero-dot="{{ forloop.counter0 }}"
+              aria-label="Photo {{ forloop.counter }}"
+              class="w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-colors ring-1 ring-black/20"></button>
+      {% endfor %}
     </div>
+    {% endif %}
   </div>
 </section>
+{% endif %}
 
 <!-- ── QUICK LINKS ─────────────────────────────────────────────────────────── -->
 <section class="bg-saffron-500 py-6">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
 
-      <a href="/schedule/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors group">
+      <a href="/schedule/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors">
         <span class="text-2xl flex-shrink-0">📅</span>
         <div>
           <div class="font-semibold text-sm leading-tight">Schedule</div>
-          <div class="text-xs text-white/70">Diwan · Langar · Events</div>
+          <div class="text-xs text-white/70">Daily programme</div>
         </div>
       </a>
 
-      <a href="/livestream/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors group">
+      <a href="/livestream/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors">
         <span class="text-2xl flex-shrink-0">📺</span>
         <div>
           <div class="font-semibold text-sm leading-tight">Livestream</div>
-          <div class="text-xs text-white/70">Daily · Morning &amp; Evening</div>
+          <div class="text-xs text-white/70">Morning &amp; evening</div>
         </div>
       </a>
 
-      <a href="/school/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors group">
-        <span class="text-2xl flex-shrink-0">🏫</span>
+      <a href="/academy/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors">
+        <span class="text-2xl flex-shrink-0">📖</span>
         <div>
-          <div class="font-semibold text-sm leading-tight">Khalsa School</div>
-          <div class="text-xs text-white/70">Punjabi · Sikh studies</div>
+          <div class="font-semibold text-sm leading-tight">Khalsa Academy</div>
+          <div class="text-xs text-white/70">Punjabi · Gurmukhi</div>
         </div>
       </a>
 
-      <a href="/contact/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors group">
+      <a href="/contact/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors">
         <span class="text-2xl flex-shrink-0">📍</span>
         <div>
           <div class="font-semibold text-sm leading-tight">Contact &amp; Directions</div>
@@ -85,111 +77,133 @@
 <!-- ── ABOUT ───────────────────────────────────────────────────────────────── -->
 <section class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
-
-      <!-- Placeholder building photo -->
-      <div class="relative rounded-2xl overflow-hidden shadow-xl"
-           style="background: linear-gradient(135deg, #152D54 0%, #1B3A6B 50%, #2a4f8f 100%);
-                  min-height: 340px;">
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-white/20 gap-3">
-          <span class="text-8xl">☬</span>
-          <span class="text-sm tracking-widest uppercase">Gurdwara Building Photo</span>
-        </div>
-        <!-- Decorative saffron bar at bottom -->
-        <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-saffron-500"></div>
+    <div class="max-w-3xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-6 leading-tight">
+        About the Gurdwara
+      </h2>
+      <div class="space-y-4 text-gray-600 leading-relaxed">
+        <p>
+          The {{ site.name }} — home of Gurdwara Sahib El Sobrante — has been
+          serving the Bay Area Sikh community since its establishment in 1969. What began as
+          informal gatherings in Berkeley grew into a formal organization with one purpose: to give the
+          Bay Area's growing Sikh population a dedicated place of worship.
+        </p>
+        <p>
+          In 1976, approximately five acres of hillside in El Sobrante were purchased for the Gurdwara.
+          The first building phase was completed in May 1979, and the current structure, with its
+          golden domes and views over the El Sobrante valley and San Pablo Bay, was completed in
+          June 1992.
+        </p>
+        <p>
+          Rooted in the teachings of Sri Guru Granth Sahib Ji, the Gurdwara is open to all regardless
+          of faith or background. Langar — a free community meal — is served daily to every visitor.
+        </p>
       </div>
-
-      <!-- About text -->
-      <div>
-        <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-6 leading-tight">
-          Serving the Sikh community<br>of the Bay Area since 1969
-        </h2>
-        <div class="space-y-4 text-gray-600 leading-relaxed">
-          <p>
-            The Sikh Center of San Francisco Bay Area — home of Gurdwara Sahib El Sobrante — has been
-            serving the Bay Area Sikh community since its establishment in 1969. What began as
-            informal gatherings in Berkeley grew into a formal organization with one purpose: to give the
-            Bay Area's growing Sikh population a dedicated place of worship.
-          </p>
-          <p>
-            In 1976, approximately five acres of hillside in El Sobrante were purchased for the Gurdwara.
-            The first building phase was completed in May 1979, and the current structure — with its
-            distinctive golden domes and sweeping views of the El Sobrante valley and San Pablo Bay —
-            was completed in June 1992. It stands as one of the most magnificent Gurdwaras in North America.
-          </p>
-          <p>
-            Rooted in the teachings of Sri Guru Granth Sahib Ji, the Gurdwara is open to all regardless
-            of faith or background. Langar — a free community meal — is served daily to every visitor.
-            Regular diwan is held every Sunday morning and Wednesday evening, and the Gurdwara runs
-            educational programs for the children of the sangat throughout the year.
-          </p>
+      <div class="mt-8 flex flex-wrap gap-8 text-sm">
+        <div>
+          <div class="text-3xl font-bold text-saffron-500">1969</div>
+          <div class="text-gray-500">Year established</div>
         </div>
-        <div class="mt-8 flex flex-wrap gap-6 text-sm">
-          <div class="text-center">
-            <div class="text-3xl font-bold text-saffron-500">1969</div>
-            <div class="text-gray-500">Year established</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-saffron-500">5 acres</div>
-            <div class="text-gray-500">Hilltop grounds<br>in El Sobrante</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-saffron-500">Daily</div>
-            <div class="text-gray-500">Free langar<br>for all visitors</div>
-          </div>
+        <div>
+          <div class="text-3xl font-bold text-saffron-500">5 acres</div>
+          <div class="text-gray-500">Hilltop grounds<br>in El Sobrante</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-saffron-500">Daily</div>
+          <div class="text-gray-500">Free langar<br>for all visitors</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── COMING UP AT A GLANCE ──────────────────────────────────────────────── -->
+<!-- ── HISTORY CAROUSEL ────────────────────────────────────────────────────
+     These are archival scans with their captions printed into the image and
+     white borders around them. So: letterbox them on a dark mat (object-contain,
+     not object-cover) and do NOT draw a caption underneath — it would duplicate
+     the one already in the photo. The caption field is used as alt text only.
+──────────────────────────────────────────────────────────────────────────── -->
+{% if history_photos %}
+<section class="py-16 bg-navy-900">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-white">History</h2>
+      <p class="text-gray-400 text-sm hidden sm:block">
+        <span id="history-position">1</span> / {{ history_photos|length }}
+      </p>
+    </div>
+
+    {% comment %}
+    The box takes the shape of whichever photo is showing, rather than being a
+    fixed rectangle. These scans run from tall portrait to wide panorama, and a
+    fixed box would sit each one in a pool of empty space that reads as a frame.
+    Aspect ratios come from the database (see Photo.image_width) so the sizing
+    is right on first paint, with no jump once the images load.
+    {% endcomment %}
+    <div id="history" class="relative flex justify-center">
+      <div data-history-frame class="relative overflow-hidden shrink-0 transition-[width,height] duration-500"
+           style="aspect-ratio: {% if history_photos.0.image_width %}{{ history_photos.0.image_width }} / {{ history_photos.0.image_height }}{% else %}16 / 10{% endif %};
+                  height: clamp(220px, 46vh, 500px); max-width: 100%;">
+        {% for photo in history_photos %}
+        <img src="{{ photo.image.url }}"
+             alt="{{ photo.caption }}"
+             data-history-slide
+             data-aspect="{% if photo.image_width %}{{ photo.image_width }} / {{ photo.image_height }}{% else %}16 / 10{% endif %}"
+             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 {% if not forloop.first %}opacity-0{% endif %}"
+             {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+        {% endfor %}
+      </div>
+
+      {% if history_photos|length > 1 %}
+      <button type="button" data-history-prev aria-label="Previous photo"
+              class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <button type="button" data-history-next aria-label="Next photo"
+              class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <div class="flex justify-center gap-2 mt-5 flex-wrap">
+        {% for photo in history_photos %}
+        <button type="button" data-history-dot="{{ forloop.counter0 }}"
+                aria-label="Photo {{ forloop.counter }}"
+                class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/70 transition-colors"></button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ── UPCOMING EVENTS ────────────────────────────────────────────────────── -->
 <section class="py-16 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between mb-8">
-      <div>
-        <h2 class="text-2xl font-bold text-navy-900">Upcoming Programs</h2>
-      </div>
-      <a href="/schedule/" class="text-saffron-600 hover:text-saffron-700 text-sm font-semibold transition-colors">
-        Full schedule →
+      <h2 class="text-2xl font-bold text-navy-900">Upcoming Events</h2>
+      <a href="/events/" class="text-saffron-600 hover:text-saffron-700 text-sm font-semibold transition-colors">
+        All events &amp; calendar →
       </a>
     </div>
 
-    {% if preview_entries %}
+    {% if upcoming_events %}
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {% for entry in preview_entries %}
-      <div class="bg-white rounded-xl border {% if entry.is_featured %}border-saffron-300 ring-1 ring-saffron-200{% else %}border-gray-100{% endif %} p-5 shadow-sm hover:shadow-md transition-shadow">
-        {% if entry.is_featured %}
-        <span class="inline-block bg-saffron-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">
-          ★ Special Event
-        </span>
-        {% else %}
-        <!-- Category pill -->
-        {% if entry.category == "Diwan" %}
-        <span class="inline-block bg-blue-50 text-blue-700 text-xs border border-blue-100 px-2.5 py-0.5 rounded-full mb-3">Diwan</span>
-        {% elif entry.category == "Langar" %}
-        <span class="inline-block bg-amber-50 text-amber-700 text-xs border border-amber-100 px-2.5 py-0.5 rounded-full mb-3">Langar</span>
-        {% elif entry.category == "School" %}
-        <span class="inline-block bg-green-50 text-green-700 text-xs border border-green-100 px-2.5 py-0.5 rounded-full mb-3">School</span>
-        {% endif %}
-        {% endif %}
-
-        <h3 class="font-semibold text-gray-900 mb-2">{{ entry.title }}</h3>
-        <p class="text-xs text-gray-400 mb-0.5">
-          {{ entry.date|date:"l, F j" }}
-        </p>
-        <p class="text-xs text-gray-400 mb-2">
-          {{ entry.start_time|time:"g:i A" }}{% if entry.end_time %} – {{ entry.end_time|time:"g:i A" }}{% endif %}
-          · {{ entry.location }}
-        </p>
-        {% if entry.notes %}
-        <p class="text-xs text-gray-500 leading-relaxed border-t border-gray-50 pt-2 mt-2">{{ entry.notes }}</p>
-        {% endif %}
-      </div>
+      {% for event in upcoming_events %}
+      {% include "partials/event_card.html" %}
       {% endfor %}
     </div>
     {% else %}
-    <p class="text-gray-400 text-center py-10">No upcoming events. Check back soon.</p>
+    <div class="bg-white rounded-xl border border-gray-100 p-8 text-center">
+      <p class="text-gray-500">No events listed right now.</p>
+      <a href="/events/" class="text-saffron-600 hover:text-saffron-700 text-sm font-semibold mt-2 inline-block">
+        See the full calendar →
+      </a>
+    </div>
     {% endif %}
   </div>
 </section>
@@ -203,15 +217,15 @@
         <p class="text-saffron-600 font-semibold uppercase tracking-widest text-xs mb-2">Visit Us</p>
         <h2 class="text-2xl font-bold text-navy-900 mb-4">Find the Gurdwara</h2>
         <address class="not-italic text-gray-600 mb-4 leading-relaxed">
-          <strong class="text-navy-800 font-semibold">El Sobrante Gurdwara Sahib</strong><br>
-          {{ gurdwara.address_line1 }}<br>
-          {{ gurdwara.address_line2 }}
+          <strong class="text-navy-800 font-semibold">{{ site.name }}</strong><br>
+          {{ site.address_line1 }}<br>
+          {{ site.address_line2 }}
         </address>
         <p class="text-sm text-gray-500 mb-6">
           Situated in the hills of El Sobrante, 25 miles north of San Francisco.
-          Free parking available on-site. Open daily 5:00 AM – 8:30 PM.
+          Free parking available on-site.{% if site.opening_hours %} {{ site.opening_hours }}.{% endif %}
         </p>
-        <a href="{{ gurdwara.maps_directions_url }}" target="_blank" rel="noopener"
+        <a href="{{ site.maps_directions_url }}" target="_blank" rel="noopener"
            class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-sm">
           Get Directions
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,17 +235,149 @@
         </a>
       </div>
 
-      <!-- Static Google Maps embed — no API key required at basic tier -->
       <div class="rounded-xl overflow-hidden shadow-lg h-64">
-        <iframe
-          src="https://maps.google.com/maps?q=3550+Hillcrest+Rd+El+Sobrante+CA+94803&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        <iframe src="{{ site.maps_embed_url }}"
           width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="El Sobrante Gurdwara Sahib location map">
+          title="{{ site.name }} location map">
         </iframe>
       </div>
     </div>
   </div>
 </section>
 
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  // Two independent slideshows: the hero autoplays, the history carousel is
+  // driven by the visitor. Both respect prefers-reduced-motion.
+  (function () {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function carousel(slides, dots, { autoplayMs = 0, onChange = null } = {}) {
+      if (slides.length === 0) return null;
+      let index = 0;
+      let timer = null;
+
+      function paint() {
+        slides.forEach((s, i) => s.classList.toggle("opacity-0", i !== index));
+        dots.forEach((d, i) => {
+          d.classList.toggle("bg-white", i === index);
+          d.classList.toggle("bg-white/50", i !== index && d.dataset.heroDot !== undefined);
+          d.classList.toggle("bg-white/30", i !== index && d.dataset.historyDot !== undefined);
+        });
+        if (onChange) onChange(index);
+      }
+
+      function go(next) {
+        index = (next + slides.length) % slides.length;
+        paint();
+      }
+
+      function start() {
+        if (autoplayMs && !reduceMotion && slides.length > 1) {
+          timer = setInterval(() => go(index + 1), autoplayMs);
+        }
+      }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+      dots.forEach((dot, i) => dot.addEventListener("click", () => { stop(); go(i); start(); }));
+      paint();
+      start();
+      return { go, next: () => go(index + 1), prev: () => go(index - 1), stop, start };
+    }
+
+    // Hero — autoplays, pauses on hover so a visitor can look at one photo.
+    const heroEl = document.getElementById("hero");
+    if (heroEl) {
+      const hero = carousel(
+        Array.from(heroEl.querySelectorAll("[data-hero-slide]")),
+        Array.from(heroEl.querySelectorAll("[data-hero-dot]")),
+        { autoplayMs: 6000 }
+      );
+      if (hero) {
+        heroEl.addEventListener("mouseenter", hero.stop);
+        heroEl.addEventListener("mouseleave", hero.start);
+      }
+    }
+
+    // History — manual, with arrows, dots, keyboard and swipe.
+    const histEl = document.getElementById("history");
+    if (histEl) {
+      const position = document.getElementById("history-position");
+      const frame = histEl.querySelector("[data-history-frame]");
+      const slideEls = Array.from(histEl.querySelectorAll("[data-history-slide]"));
+
+      // Size the box to the photo's own shape, so nothing is letterboxed and
+      // nothing is framed. The bounds are ratios rather than pixel heights:
+      // a fixed floor that is sensible on a desktop is taller than a phone's
+      // whole column, and would crop landscape photos that fit perfectly well.
+      const WIDEST = 2.2;   // flatter than this and a panorama becomes a slit
+      const TALLEST = 0.7;  // taller than this and a portrait scan dominates
+
+      function fitFrame(index) {
+        if (!frame) return;
+        const el = slideEls[index];
+        const [w, h] = (el.dataset.aspect || "16/10").split("/").map(Number);
+        if (!w || !h) return;
+        const ratio = w / h;
+        const available = histEl.getBoundingClientRect().width;
+        const minH = available / WIDEST;
+        const maxH = Math.min(available / TALLEST, innerHeight * 0.7);
+        const height = Math.max(minH, Math.min(maxH, available / ratio));
+        frame.style.aspectRatio = "auto";
+        frame.style.height = height + "px";
+        frame.style.width = Math.min(available, height * ratio) + "px";
+      }
+
+      const hist = carousel(
+        slideEls,
+        Array.from(histEl.querySelectorAll("[data-history-dot]")),
+        {
+          // Slower than the hero — these are photographs people read, not a
+          // backdrop. Pauses on hover so a photo can be looked at properly.
+          autoplayMs: 7000,
+          onChange: (i) => {
+            if (position) position.textContent = i + 1;
+            fitFrame(i);
+          },
+        }
+      );
+
+      // Re-fit on resize, tracking whichever photo is showing.
+      addEventListener("resize", () => {
+        const active = slideEls.findIndex((s) => !s.classList.contains("opacity-0"));
+        if (active >= 0) fitFrame(active);
+      });
+      if (hist) {
+        // Any manual move restarts the timer, so a photo you just chose isn't
+        // swapped out a moment later by the autoplay that was already running.
+        const manual = (fn) => () => { hist.stop(); fn(); hist.start(); };
+        const next = manual(hist.next);
+        const prev = manual(hist.prev);
+
+        histEl.addEventListener("mouseenter", hist.stop);
+        histEl.addEventListener("mouseleave", hist.start);
+        histEl.querySelector("[data-history-prev]")?.addEventListener("click", prev);
+        histEl.querySelector("[data-history-next]")?.addEventListener("click", next);
+
+        histEl.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") prev();
+          if (e.key === "ArrowRight") next();
+        });
+        histEl.setAttribute("tabindex", "0");
+
+        let touchX = null;
+        histEl.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+        histEl.addEventListener("touchend", (e) => {
+          if (touchX === null) return;
+          const dx = e.changedTouches[0].clientX - touchX;
+          if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
+          touchX = null;
+        }, { passive: true });
+      }
+    }
+  })();
+</script>
 {% endblock %}

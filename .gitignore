@@ -16,8 +16,10 @@ env/
 # Django
 db.sqlite3
 *.log
-media/
-staticfiles/
+# Anchored to the project root on purpose: a bare "media/" also matches
+# docs/media/, which is the committee's static preview and must be committed.
+/media/
+/staticfiles/
 
 # OS
 .DS_Store

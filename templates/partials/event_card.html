@@ -1,0 +1,32 @@
+{% comment %}
+Expects `event`. Used on the home page strip and the events page so a change
+to how an event looks only has to be made once.
+{% endcomment %}
+<article class="bg-white rounded-xl border {% if event.is_featured %}border-saffron-300 ring-1 ring-saffron-200{% else %}border-gray-100{% endif %} shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+  {% if event.image %}
+  <img src="{{ event.image.url }}" alt="{{ event.title }}"
+       class="w-full aspect-[3/2] object-cover" loading="lazy">
+  {% endif %}
+  <div class="p-5 flex-1">
+    {% if event.is_featured %}
+    <span class="inline-block bg-saffron-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full mb-3">
+      ★ Special Event
+    </span>
+    {% endif %}
+
+    <h3 class="font-semibold text-gray-900 mb-2">{{ event.title }}</h3>
+
+    <p class="text-xs text-gray-400 mb-0.5">
+      {{ event.date|date:"l, F j" }}{% if event.end_date %} – {{ event.end_date|date:"F j" }}{% endif %}
+    </p>
+    {% if event.start_time or event.location %}
+    <p class="text-xs text-gray-400 mb-2">
+      {% if event.start_time %}{{ event.start_time|time:"g:i A" }}{% endif %}{% if event.start_time and event.location %} · {% endif %}{{ event.location }}
+    </p>
+    {% endif %}
+
+    {% if event.description %}
+    <p class="text-xs text-gray-500 leading-relaxed border-t border-gray-50 pt-2 mt-2">{{ event.description }}</p>
+    {% endif %}
+  </div>
+</article>

@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Livestream — El Sobrante Gurdwara Sahib{% endblock %}
+{% block title %}Livestream — {{ site.name }}{% endblock %}
 
 {% block content %}
 
 <!-- ── PAGE HEADER ────────────────────────────────────────────────────────── -->
 <section class="bg-navy-800 text-white py-14">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">El Sobrante Gurdwara Sahib</p>
+    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">{{ site.name }}</p>
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Livestream</h1>
     <p class="text-gray-300 text-sm">
       Daily live diwan on YouTube — morning and evening, 7 days a week.
@@ -16,13 +16,18 @@
 
 <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
 
-  <!-- ── YOUTUBE EMBED ─────────────────────────────────────────────────── -->
+  <!-- ── YOUTUBE EMBED ───────────────────────────────────────────────────
+       Points at the channel's live stream, not a fixed video ID, so it always
+       plays whatever is live right now and shows YouTube's own offline state
+       otherwise. Nothing to update when a new stream starts.
+  ──────────────────────────────────────────────────────────────────────────── -->
+  {% if site.youtube_live_embed_url %}
   <div class="rounded-2xl overflow-hidden shadow-2xl bg-black mb-4">
     <div class="relative w-full" style="padding-bottom: 56.25%;">
       <iframe
         class="absolute inset-0 w-full h-full"
-        src="https://www.youtube.com/embed/{{ gurdwara.youtube_live_video_id }}?autoplay=0&rel=0"
-        title="El Sobrante Gurdwara Sahib — Live Stream"
+        src="{{ site.youtube_live_embed_url }}"
+        title="{{ site.name }} — Live Stream"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
@@ -30,8 +35,16 @@
       </iframe>
     </div>
   </div>
+  {% else %}
+  <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-4">
+    <p class="text-amber-900 font-semibold text-sm mb-1">Livestream not connected yet</p>
+    <p class="text-amber-800 text-sm">
+      Add the YouTube channel ID under <strong>Gurdwara details</strong> in the website admin.
+    </p>
+  </div>
+  {% endif %}
   <div class="flex justify-end mb-8">
-    <a href="{{ gurdwara.youtube_channel_url }}/live" target="_blank" rel="noopener"
+    <a href="{{ site.youtube_channel_url }}/live" target="_blank" rel="noopener"
        class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-red-500 transition-colors">
       <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
         <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
@@ -47,53 +60,29 @@
       <p class="text-gray-300 text-xs mt-0.5">7 days a week — streamed live from the Gurdwara</p>
     </div>
     <div class="divide-y divide-gray-50">
-
-      <div class="px-6 py-4 flex items-start gap-5">
-        <div class="w-6 h-6 rounded-full bg-saffron-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <span class="text-saffron-600 text-xs font-bold">AM</span>
+      {% for item in program_items %}
+      <div class="px-6 py-4 {% if item.is_highlighted %}bg-saffron-50{% endif %}">
+        <div class="font-semibold text-gray-900 mb-1">
+          {{ item.heading }}
+          {% if item.days %}
+          <span class="{% if item.is_highlighted %}text-saffron-600{% else %}text-gray-400{% endif %} font-normal text-xs">— {{ item.days }}</span>
+          {% endif %}
         </div>
-        <div>
-          <div class="font-semibold text-gray-900 mb-1">Morning Program <span class="text-gray-400 font-normal text-xs">— Daily</span></div>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Nitnem · Asa Di Vaar · Ardas · Hukamnama
-          </p>
-        </div>
+        <p class="text-sm text-gray-600 leading-relaxed">{{ item.items }}</p>
       </div>
-
-      <div class="px-6 py-4 flex items-start gap-5">
-        <div class="w-6 h-6 rounded-full bg-navy-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <span class="text-navy-700 text-xs font-bold">PM</span>
-        </div>
-        <div>
-          <div class="font-semibold text-gray-900 mb-1">Evening Program <span class="text-gray-400 font-normal text-xs">— Daily</span></div>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Rehrass Sahib · Aarti · Kirtan · Katha · Ardas · Hukamnama · Kirtan Sohila · Samapti
-          </p>
-        </div>
-      </div>
-
-      <div class="px-6 py-4 flex items-start gap-5 bg-saffron-50">
-        <div class="w-6 h-6 rounded-full bg-saffron-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <span class="text-white text-xs font-bold">+</span>
-        </div>
-        <div>
-          <div class="font-semibold text-gray-900 mb-1">Wednesday &amp; Friday <span class="text-saffron-600 font-normal text-xs">— Additional program</span></div>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Sukhmani Sahib · Rehrass Sahib · Kirtan · Katha · Ardas · Hukamnama · Kirtan Sohila
-          </p>
-        </div>
-      </div>
-
+      {% empty %}
+      <p class="px-6 py-6 text-sm text-gray-400">The programme has not been added yet.</p>
+      {% endfor %}
     </div>
   </div>
 
   <!-- ── CHANNEL LINK ───────────────────────────────────────────────────── -->
   <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
     <div>
-      <p class="text-sm font-semibold text-gray-700">El Sobrante Gurdwara Sahib on YouTube</p>
+      <p class="text-sm font-semibold text-gray-700">{{ site.name }} on YouTube</p>
       <p class="text-xs text-gray-400 mt-0.5">Past streams and recordings are also available on the channel.</p>
     </div>
-    <a href="{{ gurdwara.youtube_channel_url }}" target="_blank" rel="noopener"
+    <a href="{{ site.youtube_channel_url }}" target="_blank" rel="noopener"
        class="flex-shrink-0 inline-flex items-center gap-2 bg-white border border-gray-200 hover:border-red-300 text-gray-700 hover:text-red-600 text-sm font-medium px-4 py-2 rounded-lg transition-colors shadow-sm">
       <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 24 24">
         <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>

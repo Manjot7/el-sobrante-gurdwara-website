@@ -1,38 +1,36 @@
 {% extends "base.html" %}
-{% block title %}Khalsa School — El Sobrante Gurdwara Sahib{% endblock %}
+{% block title %}Khalsa Academy — {{ site.name }}{% endblock %}
 
 {% block content %}
 
 <!-- ── PAGE HEADER ────────────────────────────────────────────────────────── -->
 <section class="bg-navy-800 text-white py-14">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">El Sobrante Gurdwara Sahib</p>
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">Khalsa School</h1>
-    <p class="text-gray-300 text-sm">Punjabi language, Gurmukhi script, and Sikh heritage for the next generation.</p>
+    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">{{ site.name }}</p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Khalsa Academy</h1>
+    <p class="text-gray-300 text-sm">Punjabi language, Gurmukhi script, and Sikh history.</p>
   </div>
 </section>
 
 <!-- ── PROGRAM OVERVIEW ───────────────────────────────────────────────────── -->
 <section class="py-16 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
+    <div class="grid {% if academy_photos %}lg:grid-cols-2{% endif %} gap-14 items-center">
 
       <div>
         <h2 class="text-2xl md:text-3xl font-bold text-navy-900 mb-6 leading-tight">
-          Keeping the next generation<br>connected to their roots
+          About the Academy
         </h2>
         <div class="space-y-4 text-gray-600 leading-relaxed">
           <p>
-            The Sikh Center of San Francisco Bay Area has offered educational programs for children
-            of the sangat since the Gurdwara's early years. The goal has always been the same: ensure
-            that young Sikhs growing up in the Bay Area remain connected to their language, scripture,
-            and heritage.
+            The {{ site.name }} has offered educational programs for children
+            of the sangat since the Gurdwara's early years, so that children growing up in the Bay
+            Area can read Gurmukhi, speak Punjabi, and learn Sikh history.
           </p>
           <p>
             Classes meet on Sunday mornings alongside the diwan, so families need only a single visit
             each week. Children learn Gurmukhi script, Punjabi reading and conversation, Sikh history,
-            and the significance of our banis and ceremonies — giving them the foundation to participate
-            fully in their faith community as they grow.
+            and the significance of the banis and ceremonies.
           </p>
           <p>
             In addition to weekly Sunday classes, the Gurdwara runs summer camps for students from
@@ -43,16 +41,20 @@
         </div>
       </div>
 
-      <!-- Placeholder photo -->
-      <div class="relative rounded-2xl overflow-hidden shadow-xl"
-           style="background: linear-gradient(135deg, #166534 0%, #15803d 50%, #16a34a 100%);
-                  min-height: 320px;">
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-white/20 gap-3">
-          <span class="text-7xl">📚</span>
-          <span class="text-sm tracking-widest uppercase">Classroom Photo</span>
-        </div>
+      {% comment %}
+      Uses the first Academy photo from the admin. With no photos uploaded the
+      column disappears entirely and the text runs full width — better than a
+      coloured box captioned "Classroom Photo" going live.
+      {% endcomment %}
+      {% if academy_photos %}
+      {% with lead=academy_photos.0 %}
+      <div class="relative rounded-2xl overflow-hidden shadow-xl">
+        <img src="{{ lead.image.url }}" alt="{{ lead.caption }}"
+             class="w-full h-full object-cover" style="min-height: 320px;" loading="lazy">
         <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-saffron-500"></div>
       </div>
+      {% endwith %}
+      {% endif %}
     </div>
   </div>
 </section>
@@ -161,34 +163,22 @@
   </div>
 </section>
 
-<!-- ── UPCOMING SCHOOL SESSIONS (from schedule data) ─────────────────────── -->
+<!-- ── WHEN CLASSES MEET ──────────────────────────────────────────────────── -->
 <section class="py-14 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-bold text-navy-900">Upcoming Classes</h2>
-      <a href="/schedule/" class="text-saffron-600 hover:text-saffron-700 text-sm font-semibold">Full schedule →</a>
+      <h2 class="text-2xl font-bold text-navy-900">When Classes Meet</h2>
+      <a href="/events/" class="text-saffron-600 hover:text-saffron-700 text-sm font-semibold">Events calendar →</a>
     </div>
-
-    {% if school_entries %}
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {% for entry in school_entries %}
-      <div class="bg-white rounded-xl border border-green-100 p-5 shadow-sm">
-        <span class="inline-block bg-green-50 text-green-700 text-xs border border-green-100 px-2.5 py-0.5 rounded-full font-medium mb-3">School</span>
-        <h3 class="font-semibold text-gray-900 mb-1">{{ entry.title }}</h3>
-        <p class="text-xs text-gray-400 mb-0.5">{{ entry.date|date:"l, F j" }}</p>
-        <p class="text-xs text-gray-400 mb-2">
-          {{ entry.start_time|time:"g:i A" }}{% if entry.end_time %} – {{ entry.end_time|time:"g:i A" }}{% endif %}
-          · {{ entry.location }}
-        </p>
-        {% if entry.notes %}
-        <p class="text-xs text-gray-500 leading-relaxed border-t border-gray-50 pt-2">{{ entry.notes }}</p>
-        {% endif %}
-      </div>
-      {% endfor %}
+    <div class="bg-white rounded-xl border border-gray-100 p-6 shadow-sm max-w-2xl">
+      <p class="text-gray-600 leading-relaxed">
+        Classes run on <strong class="text-navy-800">Sunday mornings</strong> alongside the diwan,
+        so families need only a single visit each week.
+      </p>
+      <p class="text-gray-500 text-sm mt-3">
+        Term dates, summer camps and any breaks are posted on the events calendar.
+      </p>
     </div>
-    {% else %}
-    <p class="text-gray-400 text-sm">No upcoming school sessions listed. Check the full schedule.</p>
-    {% endif %}
   </div>
 </section>
 
@@ -201,32 +191,39 @@
       <div class="bg-saffron-50 border border-saffron-200 rounded-xl p-6 mb-8">
         <h3 class="font-bold text-navy-800 mb-4">Registration</h3>
         <ol class="space-y-3 text-sm text-gray-700 list-decimal list-inside">
-          <li>Bring your child to any Sunday Khalsa School session to meet the teachers and observe a class.</li>
+          <li>Bring your child to any Sunday Khalsa Academy session to meet the teachers and observe a class.</li>
           <li>Complete the paper registration form available at the Gurdwara front desk.</li>
           <li>Pay the annual registration fee (covers printed materials for the year).</li>
           <li>Classes begin the following Sunday after registration is complete.</li>
         </ol>
       </div>
 
+      {% comment %}
+      The fee and a named coordinator with a direct line were invented for the
+      mockup. Publishing invented contact details would send families to a
+      number that isn't ours, so until the committee confirms the real ones
+      this points at the Gurdwara's own phone. See COMMITTEE-QUESTIONS.md.
+      {% endcomment %}
       <div class="grid sm:grid-cols-2 gap-6 mb-8">
         <div class="bg-gray-50 rounded-xl p-5">
           <h4 class="font-semibold text-navy-800 mb-3">Fees</h4>
           <p class="text-sm text-gray-600">
-            Annual registration: <strong class="text-navy-800">$40 per child</strong><br>
-            (covers printed learning materials for the year)
+            There is an annual registration fee covering printed learning
+            materials for the year.
           </p>
           <p class="text-xs text-gray-400 mt-2">
-            Fee waivers available — speak to the Khalsa School coordinator.
+            Fee waivers are available — please ask the Academy coordinator.
             No child is turned away for inability to pay.
           </p>
         </div>
         <div class="bg-gray-50 rounded-xl p-5">
           <h4 class="font-semibold text-navy-800 mb-3">Contact</h4>
           <p class="text-sm text-gray-600">
-            <strong class="text-navy-800">School Coordinator</strong><br>
-            Gurpreet Singh Sandhu<br>
-            <a href="tel:+15105550192" class="text-saffron-600 hover:underline">(510) 555-0192</a><br>
-            <a href="mailto:school@elsobrantegurdwara.org" class="text-saffron-600 hover:underline text-xs">school@elsobrantegurdwara.org</a>
+            <strong class="text-navy-800">Academy Coordinator</strong><br>
+            Please call the Gurdwara and ask for the Academy coordinator.
+          </p>
+          <p class="text-sm text-gray-600 mt-2">
+            <a href="tel:{{ site.phone_main_tel }}" class="text-saffron-600 hover:underline">{{ site.phone_main }}</a>
           </p>
         </div>
       </div>
@@ -241,55 +238,28 @@
   </div>
 </section>
 
-<!-- ── PHOTO GALLERY (placeholder) ───────────────────────────────────────── -->
+<!-- ── PHOTO GALLERY ─────────────────────────────────────────────────────
+     Managed in the admin under "Photos on the website" -> "Khalsa Academy
+     gallery". The whole section hides itself when there are no photos, so an
+     empty gallery never shows up as a row of blank boxes.
+──────────────────────────────────────────────────────────────────────────── -->
+{% if academy_photos %}
 <section class="py-14 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <h2 class="text-2xl font-bold text-navy-900 mb-6">From Our Classes</h2>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-
-      <!-- 6 placeholder photo tiles -->
-      <div class="rounded-xl overflow-hidden aspect-video"
-           style="background: linear-gradient(135deg, #166534, #15803d);">
-        <div class="w-full h-full flex items-center justify-center text-white/25 text-sm flex-col gap-1">
-          <span class="text-3xl">📸</span><span>Class photo</span>
-        </div>
-      </div>
-      <div class="rounded-xl overflow-hidden aspect-video"
-           style="background: linear-gradient(135deg, #1e40af, #2563eb);">
-        <div class="w-full h-full flex items-center justify-center text-white/25 text-sm flex-col gap-1">
-          <span class="text-3xl">📸</span><span>Reading session</span>
-        </div>
-      </div>
-      <div class="rounded-xl overflow-hidden aspect-video"
-           style="background: linear-gradient(135deg, #7c3aed, #8b5cf6);">
-        <div class="w-full h-full flex items-center justify-center text-white/25 text-sm flex-col gap-1">
-          <span class="text-3xl">📸</span><span>Gurmukhi practice</span>
-        </div>
-      </div>
-      <div class="rounded-xl overflow-hidden aspect-video"
-           style="background: linear-gradient(135deg, #be185d, #db2777);">
-        <div class="w-full h-full flex items-center justify-center text-white/25 text-sm flex-col gap-1">
-          <span class="text-3xl">📸</span><span>Year-end celebration</span>
-        </div>
-      </div>
-      <div class="rounded-xl overflow-hidden aspect-video"
-           style="background: linear-gradient(135deg, #b45309, #d97706);">
-        <div class="w-full h-full flex items-center justify-center text-white/25 text-sm flex-col gap-1">
-          <span class="text-3xl">📸</span><span>Student kirtan</span>
-        </div>
-      </div>
-      <div class="rounded-xl overflow-hidden aspect-video"
-           style="background: linear-gradient(135deg, #065f46, #059669);">
-        <div class="w-full h-full flex items-center justify-center text-white/25 text-sm flex-col gap-1">
-          <span class="text-3xl">📸</span><span>Community event</span>
-        </div>
-      </div>
-
+      {% for photo in academy_photos %}
+      <figure class="rounded-xl overflow-hidden bg-white border border-gray-100 shadow-sm">
+        <img src="{{ photo.image.url }}" alt="{{ photo.caption }}"
+             class="w-full aspect-video object-cover" loading="lazy">
+        {% if photo.caption %}
+        <figcaption class="text-xs text-gray-500 px-3 py-2">{{ photo.caption }}</figcaption>
+        {% endif %}
+      </figure>
+      {% endfor %}
     </div>
-    <p class="text-xs text-gray-400 mt-4 text-center">
-      Photos from recent Khalsa School classes and events. Placeholder — real photos to be added before launch.
-    </p>
   </div>
 </section>
+{% endif %}
 
 {% endblock %}

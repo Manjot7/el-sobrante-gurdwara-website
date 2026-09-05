@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}El Sobrante Gurdwara Sahib{% endblock %}</title>
+  <title>{% block title %}{{ site.name }}{% endblock %}</title>
+
+  <link rel="icon" href="{% static 'icons/favicon.ico' %}" sizes="any">
+  <link rel="apple-touch-icon" href="{% static 'icons/apple-touch-icon.png' %}">
+  <link rel="manifest" href="{% static 'icons/site.webmanifest' %}">
+  <meta name="theme-color" content="#0F1F3D">
 
   <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,6 +27,7 @@
               700: "#C5570A",
             },
             navy: {
+              100: "#dbe4f3",
               700: "#1B3A6B",
               800: "#152D54",
               900: "#0F1F3D",
@@ -55,15 +61,18 @@
 
       <!-- Logo / wordmark -->
       <a href="/" class="flex items-center gap-3 min-w-0">
-        <span class="text-saffron-500 text-3xl leading-none flex-shrink-0">☬</span>
+        <img src="{% static 'icons/icon-192.png' %}" alt=""
+             class="w-9 h-9 rounded-full object-cover flex-shrink-0 ring-1 ring-white/20">
         <div class="min-w-0">
-          <div class="font-bold text-sm sm:text-base leading-tight truncate">El Sobrante Gurdwara Sahib</div>
-          <div class="text-xs text-saffron-400 leading-tight gurmukhi hidden sm:block">ਗੁਰਦੁਆਰਾ ਸਾਹਿਬ</div>
+          <div class="font-bold text-sm sm:text-base leading-tight truncate">{{ site.name }}</div>
+          {% if site.location_line %}
+          <div class="text-xs text-saffron-400 leading-tight hidden sm:block">{{ site.location_line }}</div>
+          {% endif %}
         </div>
       </a>
 
       <!-- Desktop links -->
-      <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+      <div class="hidden lg:flex items-center gap-1 text-sm font-medium">
         <a href="/"
            class="px-3 py-1.5 rounded-md transition-colors {% if current_page == 'home' %}text-saffron-400 bg-white/5{% else %}hover:text-saffron-400 hover:bg-white/5{% endif %}">
           Home
@@ -72,9 +81,13 @@
            class="px-3 py-1.5 rounded-md transition-colors {% if current_page == 'schedule' %}text-saffron-400 bg-white/5{% else %}hover:text-saffron-400 hover:bg-white/5{% endif %}">
           Schedule
         </a>
-        <a href="/school/"
-           class="px-3 py-1.5 rounded-md transition-colors {% if current_page == 'school' %}text-saffron-400 bg-white/5{% else %}hover:text-saffron-400 hover:bg-white/5{% endif %}">
-          School
+        <a href="/events/"
+           class="px-3 py-1.5 rounded-md transition-colors {% if current_page == 'events' %}text-saffron-400 bg-white/5{% else %}hover:text-saffron-400 hover:bg-white/5{% endif %}">
+          Events
+        </a>
+        <a href="/academy/"
+           class="px-3 py-1.5 rounded-md transition-colors {% if current_page == 'academy' %}text-saffron-400 bg-white/5{% else %}hover:text-saffron-400 hover:bg-white/5{% endif %}">
+          Academy
         </a>
         <a href="/livestream/"
            class="px-3 py-1.5 rounded-md transition-colors {% if current_page == 'livestream' %}text-saffron-400 bg-white/5{% else %}hover:text-saffron-400 hover:bg-white/5{% endif %}">
@@ -88,7 +101,7 @@
 
       <!-- Mobile hamburger -->
       <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false"
-              class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
+              class="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
         <svg id="icon-open"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -100,13 +113,14 @@
   </div>
 
   <!-- Mobile drawer -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-navy-900">
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-navy-900">
     <div class="px-4 py-3 space-y-1">
-      <a href="/"          class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'home' %}text-saffron-400{% endif %}">Home</a>
-      <a href="/schedule/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'schedule' %}text-saffron-400{% endif %}">Schedule</a>
-      <a href="/school/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'school' %}text-saffron-400{% endif %}">School</a>
+      <a href="/"           class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'home' %}text-saffron-400{% endif %}">Home</a>
+      <a href="/schedule/"  class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'schedule' %}text-saffron-400{% endif %}">Schedule</a>
+      <a href="/events/"    class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'events' %}text-saffron-400{% endif %}">Events</a>
+      <a href="/academy/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'academy' %}text-saffron-400{% endif %}">Academy</a>
       <a href="/livestream/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'livestream' %}text-saffron-400{% endif %}">Livestream</a>
-      <a href="/contact/"  class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'contact' %}text-saffron-400{% endif %}">Contact</a>
+      <a href="/contact/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 {% if current_page == 'contact' %}text-saffron-400{% endif %}">Contact</a>
     </div>
   </div>
 </nav>
@@ -123,34 +137,46 @@
 
       <!-- Column 1: Identity & contact -->
       <div>
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-saffron-500 text-2xl">☬</span>
-          <span class="font-bold text-lg leading-tight">El Sobrante Gurdwara Sahib</span>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="{% static 'icons/icon-192.png' %}" alt=""
+               class="w-8 h-8 rounded-full object-cover ring-1 ring-white/20">
+          <span class="font-bold text-lg leading-tight">{{ site.name }}</span>
         </div>
+        {% if site.location_line %}
+        <p class="text-saffron-400 text-sm mb-2">{{ site.location_line }}</p>
+        {% endif %}
         <address class="not-italic text-gray-300 text-sm leading-relaxed">
-          {{ gurdwara.address_line1 }}<br>
-          {{ gurdwara.address_line2 }}
+          {{ site.address_line1 }}<br>
+          {{ site.address_line2 }}
         </address>
         <p class="text-sm text-gray-300 mt-2">
-          <a href="tel:+15102239987" class="hover:text-saffron-400 transition-colors">{{ gurdwara.phone_main }}</a><br>
-          <a href="tel:+15102231102" class="hover:text-saffron-400 transition-colors">{{ gurdwara.phone_alt }}</a>
+          <a href="tel:{{ site.phone_main_tel }}" class="hover:text-saffron-400 transition-colors">{{ site.phone_main }}</a>
+          {% if site.phone_alt %}<br>
+          <a href="tel:{{ site.phone_alt_tel }}" class="hover:text-saffron-400 transition-colors">{{ site.phone_alt }}</a>
+          {% endif %}
         </p>
+        {% if site.email %}
         <p class="text-sm text-gray-300 mt-1">
-          <a href="mailto:{{ gurdwara.email }}" class="hover:text-saffron-400 transition-colors">{{ gurdwara.email }}</a>
+          <a href="mailto:{{ site.email }}" class="hover:text-saffron-400 transition-colors">{{ site.email }}</a>
         </p>
+        {% endif %}
         <div class="flex gap-3 mt-3">
-          <a href="{{ gurdwara.youtube_channel_url }}" target="_blank" rel="noopener"
+          {% if site.youtube_channel_url %}
+          <a href="{{ site.youtube_channel_url }}" target="_blank" rel="noopener"
              class="text-gray-400 hover:text-red-400 transition-colors" aria-label="YouTube">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
             </svg>
           </a>
-          <a href="{{ gurdwara.facebook_url }}" target="_blank" rel="noopener"
+          {% endif %}
+          {% if site.facebook_url %}
+          <a href="{{ site.facebook_url }}" target="_blank" rel="noopener"
              class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Facebook">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/>
             </svg>
           </a>
+          {% endif %}
         </div>
       </div>
 
@@ -160,49 +186,56 @@
         <ul class="space-y-2 text-sm text-gray-300">
           <li><a href="/"            class="hover:text-white transition-colors">Home &amp; About</a></li>
           <li><a href="/schedule/"   class="hover:text-white transition-colors">Weekly Schedule</a></li>
-          <li><a href="/school/"     class="hover:text-white transition-colors">Khalsa School</a></li>
+          <li><a href="/events/"     class="hover:text-white transition-colors">Events &amp; Calendar</a></li>
+          <li><a href="/academy/"    class="hover:text-white transition-colors">Khalsa Academy</a></li>
           <li><a href="/livestream/" class="hover:text-white transition-colors">Livestream</a></li>
           <li><a href="/contact/"    class="hover:text-white transition-colors">Contact &amp; Directions</a></li>
         </ul>
       </div>
 
-      <!-- Column 3: Sangat hours -->
+      <!-- Column 3: Daily programme (editable in the admin) -->
       <div>
         <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Daily Programs</h3>
-        <p class="text-sm text-gray-300 leading-relaxed">
-          Open daily 5:00 AM – 8:30 PM.<br><br>
-          <span class="text-white font-medium">Morning — 7 days</span><br>
-          Nitnem · Asa Di Vaar · Ardas · Hukamnama<br><br>
-          <span class="text-white font-medium">Evening — 7 days</span><br>
-          Rehrass Sahib · Kirtan · Katha · Ardas<br><br>
-          <span class="text-white font-medium">Wednesday &amp; Friday</span><br>
-          Sukhmani Sahib · Rehrass Sahib · Kirtan<br><br>
-          Langar (free community meal) served daily.
-        </p>
+        <div class="text-sm text-gray-300 leading-relaxed space-y-3">
+          {% if site.opening_hours %}<p>{{ site.opening_hours }}</p>{% endif %}
+          {% for item in program_items %}
+          <p>
+            <span class="text-white font-medium">{{ item.heading }}</span>{% if item.days %} — {{ item.days }}{% endif %}<br>
+            {{ item.items }}
+          </p>
+          {% endfor %}
+        </div>
       </div>
     </div>
 
     <div class="border-t border-white/10 pt-8 text-center">
       <p class="text-saffron-400 font-medium gurmukhi">ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ, ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਹਿ</p>
       <p class="text-gray-500 text-xs mt-1">Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh</p>
-      <p class="text-gray-600 text-xs mt-4">© 2026 El Sobrante Gurdwara Sahib. All are welcome.</p>
+      <p class="text-gray-600 text-xs mt-4">© {% now "Y" %} {{ site.name }}. All are welcome.</p>
+      {% if photo_credits %}
+      <p class="text-gray-600 text-xs mt-1">{{ photo_credits|join:" · " }}</p>
+      {% endif %}
     </div>
   </div>
 </footer>
 
 <script>
   // Mobile menu toggle
-  const btn  = document.getElementById("menu-btn");
-  const menu = document.getElementById("mobile-menu");
-  const iconOpen  = document.getElementById("icon-open");
-  const iconClose = document.getElementById("icon-close");
+  (function () {
+    const btn  = document.getElementById("menu-btn");
+    const menu = document.getElementById("mobile-menu");
+    const iconOpen  = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+    if (!btn || !menu) return;
 
-  btn.addEventListener("click", () => {
-    const open = menu.classList.toggle("hidden");
-    iconOpen.classList.toggle("hidden", !open);
-    iconClose.classList.toggle("hidden", open);
-    btn.setAttribute("aria-expanded", String(!open));
-  });
+    btn.addEventListener("click", () => {
+      const nowHidden = menu.classList.toggle("hidden");
+      iconOpen.classList.toggle("hidden", !nowHidden);
+      iconClose.classList.toggle("hidden", nowHidden);
+      btn.setAttribute("aria-expanded", String(!nowHidden));
+    });
+  })();
 </script>
+{% block extra_scripts %}{% endblock %}
 </body>
 </html>

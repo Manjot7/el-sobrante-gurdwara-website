@@ -1,0 +1,25 @@
+# Render blueprint. With this file in the repo, Render can configure the whole
+# service itself: New → Blueprint → pick this repo.
+#
+# NOTE ON THE FREE PLAN: the disk is ephemeral. Anything uploaded through the
+# admin — photos, events, edits — is wiped whenever the service redeploys or
+# wakes from sleep. build.sh re-seeds the starting content each time, so the
+# site always comes back looking right, but committee edits will not survive.
+# Fine for showing people the site; switch to the Starter plan plus a disk
+# before anyone relies on it. See HOSTING.md.
+services:
+  - type: web
+    name: sikh-center-website
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn gurdwara_site.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.4"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true      # Render generates a strong key
+      - key: DJANGO_DEBUG
+        value: "false"
+      - key: WEB_CONCURRENCY
+        value: "2"

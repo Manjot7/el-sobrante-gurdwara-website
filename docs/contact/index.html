@@ -4,7 +4,12 @@
   <base href="https://manjot7.github.io/el-sobrante-gurdwara-website/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact &amp; Directions — El Sobrante Gurdwara Sahib</title>
+  <title>Contact &amp; Directions — Sikh Center of SF Bay Area</title>
+
+  <link rel="icon" href="static/icons/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="static/icons/apple-touch-icon.png">
+  <link rel="manifest" href="static/icons/site.webmanifest">
+  <meta name="theme-color" content="#0F1F3D">
 
   <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +28,7 @@
               700: "#C5570A",
             },
             navy: {
+              100: "#dbe4f3",
               700: "#1B3A6B",
               800: "#152D54",
               900: "#0F1F3D",
@@ -56,15 +62,18 @@
 
       <!-- Logo / wordmark -->
       <a href="./" class="flex items-center gap-3 min-w-0">
-        <span class="text-saffron-500 text-3xl leading-none flex-shrink-0">☬</span>
+        <img src="static/icons/icon-192.png" alt=""
+             class="w-9 h-9 rounded-full object-cover flex-shrink-0 ring-1 ring-white/20">
         <div class="min-w-0">
-          <div class="font-bold text-sm sm:text-base leading-tight truncate">El Sobrante Gurdwara Sahib</div>
-          <div class="text-xs text-saffron-400 leading-tight gurmukhi hidden sm:block">ਗੁਰਦੁਆਰਾ ਸਾਹਿਬ</div>
+          <div class="font-bold text-sm sm:text-base leading-tight truncate">Sikh Center of SF Bay Area</div>
+          
+          <div class="text-xs text-saffron-400 leading-tight hidden sm:block">Gurdwara Sahib El Sobrante</div>
+          
         </div>
       </a>
 
       <!-- Desktop links -->
-      <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+      <div class="hidden lg:flex items-center gap-1 text-sm font-medium">
         <a href="./"
            class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
           Home
@@ -73,9 +82,13 @@
            class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
           Schedule
         </a>
-        <a href="school/"
+        <a href="events/"
            class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
-          School
+          Events
+        </a>
+        <a href="academy/"
+           class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
+          Academy
         </a>
         <a href="livestream/"
            class="px-3 py-1.5 rounded-md transition-colors hover:text-saffron-400 hover:bg-white/5">
@@ -89,7 +102,7 @@
 
       <!-- Mobile hamburger -->
       <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false"
-              class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
+              class="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors">
         <svg id="icon-open"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -101,13 +114,14 @@
   </div>
 
   <!-- Mobile drawer -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-navy-900">
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-navy-900">
     <div class="px-4 py-3 space-y-1">
-      <a href="./"          class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Home</a>
-      <a href="schedule/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Schedule</a>
-      <a href="school/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">School</a>
+      <a href="./"           class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Home</a>
+      <a href="schedule/"  class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Schedule</a>
+      <a href="events/"    class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Events</a>
+      <a href="academy/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Academy</a>
       <a href="livestream/" class="block py-2.5 px-3 rounded-lg hover:bg-white/10 ">Livestream</a>
-      <a href="contact/"  class="block py-2.5 px-3 rounded-lg hover:bg-white/10 text-saffron-400">Contact</a>
+      <a href="contact/"   class="block py-2.5 px-3 rounded-lg hover:bg-white/10 text-saffron-400">Contact</a>
     </div>
   </div>
 </nav>
@@ -119,10 +133,10 @@
 <!-- ── PAGE HEADER ────────────────────────────────────────────────────────── -->
 <section class="bg-navy-800 text-white py-14">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">El Sobrante Gurdwara Sahib</p>
+    <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">Sikh Center of SF Bay Area</p>
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Contact &amp; Directions</h1>
     <p class="text-gray-300 text-sm">
-      Find us on San Pablo Ave in El Sobrante. All are welcome.
+      3550 Hillcrest Rd, El Sobrante, CA 94803. All are welcome.
     </p>
   </div>
 </section>
@@ -137,11 +151,11 @@
       <div>
         <h3 class="font-bold text-navy-800 mb-1">Address</h3>
         <address class="not-italic text-sm text-gray-600 leading-relaxed">
-          El Sobrante Gurdwara Sahib<br>
+          Sikh Center of SF Bay Area<br>
           3550 Hillcrest Rd<br>
           El Sobrante, CA 94803
         </address>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=3550+Hillcrest+Rd+El+Sobrante+CA+94803" target="_blank" rel="noopener"
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=3550+Hillcrest+Rd+El+Sobrante,+CA+94803" target="_blank" rel="noopener"
            class="inline-block mt-3 text-xs text-saffron-600 hover:text-saffron-700 font-semibold hover:underline">
           Open in Google Maps →
         </a>
@@ -161,7 +175,7 @@
           (510) 223-1102
         </a>
         <p class="text-xs text-gray-400 mt-2 leading-relaxed">
-          Gurdwara is open daily 5:00 AM – 8:30 PM.
+          Open daily 5:00 AM – 8:30 PM.
         </p>
       </div>
     </div>
@@ -170,10 +184,6 @@
       <div class="text-2xl flex-shrink-0">🌐</div>
       <div>
         <h3 class="font-bold text-navy-800 mb-1">Online</h3>
-        <a href="https://thesikhcenter.com" target="_blank" rel="noopener"
-           class="text-sm text-gray-600 hover:text-saffron-600 transition-colors block">
-          thesikhcenter.com
-        </a>
         <a href="mailto:info@thesikhcenter.com"
            class="text-sm text-gray-600 hover:text-saffron-600 transition-colors block mt-1 break-all">
           info@thesikhcenter.com
@@ -201,23 +211,23 @@
   <!-- Static Google Maps embed — no API billing key required at basic tier.
        Clicking opens Google Maps for turn-by-turn directions. -->
   <div class="rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-100">
-    <a href="https://www.google.com/maps/search/?api=1&amp;query=3550+Hillcrest+Rd+El+Sobrante+CA+94803" target="_blank" rel="noopener"
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=3550+Hillcrest+Rd+El+Sobrante,+CA+94803" target="_blank" rel="noopener"
        class="block w-full h-2 bg-saffron-500 hover:bg-saffron-600 transition-colors"></a>
     <iframe
-      src="https://maps.google.com/maps?q=3550+Hillcrest+Rd+El+Sobrante+CA+94803&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      src="https://maps.google.com/maps?q=3550+Hillcrest+Rd+El+Sobrante,+CA+94803&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
       width="100%"
       height="480"
       style="border:0; display:block;"
       allowfullscreen
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
-      title="El Sobrante Gurdwara Sahib — full map">
+      title="Sikh Center of SF Bay Area — full map">
     </iframe>
   </div>
 
   <!-- Directions CTA -->
   <div class="text-center mb-12">
-    <a href="https://www.google.com/maps/search/?api=1&amp;query=3550+Hillcrest+Rd+El+Sobrante+CA+94803" target="_blank" rel="noopener"
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=3550+Hillcrest+Rd+El+Sobrante,+CA+94803" target="_blank" rel="noopener"
        class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-8 py-3.5 rounded-xl transition-colors shadow-sm text-sm">
       Directions on Google Maps
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -264,34 +274,46 @@
 
       <!-- Column 1: Identity & contact -->
       <div>
-        <div class="flex items-center gap-2 mb-4">
-          <span class="text-saffron-500 text-2xl">☬</span>
-          <span class="font-bold text-lg leading-tight">El Sobrante Gurdwara Sahib</span>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="static/icons/icon-192.png" alt=""
+               class="w-8 h-8 rounded-full object-cover ring-1 ring-white/20">
+          <span class="font-bold text-lg leading-tight">Sikh Center of SF Bay Area</span>
         </div>
+        
+        <p class="text-saffron-400 text-sm mb-2">Gurdwara Sahib El Sobrante</p>
+        
         <address class="not-italic text-gray-300 text-sm leading-relaxed">
           3550 Hillcrest Rd<br>
           El Sobrante, CA 94803
         </address>
         <p class="text-sm text-gray-300 mt-2">
-          <a href="tel:+15102239987" class="hover:text-saffron-400 transition-colors">(510) 223-9987</a><br>
+          <a href="tel:+15102239987" class="hover:text-saffron-400 transition-colors">(510) 223-9987</a>
+          <br>
           <a href="tel:+15102231102" class="hover:text-saffron-400 transition-colors">(510) 223-1102</a>
+          
         </p>
+        
         <p class="text-sm text-gray-300 mt-1">
           <a href="mailto:info@thesikhcenter.com" class="hover:text-saffron-400 transition-colors">info@thesikhcenter.com</a>
         </p>
+        
         <div class="flex gap-3 mt-3">
+          
           <a href="https://www.youtube.com/c/ElSobranteGurdwaraSahib" target="_blank" rel="noopener"
              class="text-gray-400 hover:text-red-400 transition-colors" aria-label="YouTube">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.6V8.4L15.9 12l-6.15 3.6z"/>
             </svg>
           </a>
+          
+          
           <a href="https://www.facebook.com/sfsikhcenter" target="_blank" rel="noopener"
              class="text-gray-400 hover:text-blue-400 transition-colors" aria-label="Facebook">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/>
             </svg>
           </a>
+          
         </div>
       </div>
 
@@ -301,49 +323,66 @@
         <ul class="space-y-2 text-sm text-gray-300">
           <li><a href="./"            class="hover:text-white transition-colors">Home &amp; About</a></li>
           <li><a href="schedule/"   class="hover:text-white transition-colors">Weekly Schedule</a></li>
-          <li><a href="school/"     class="hover:text-white transition-colors">Khalsa School</a></li>
+          <li><a href="events/"     class="hover:text-white transition-colors">Events &amp; Calendar</a></li>
+          <li><a href="academy/"    class="hover:text-white transition-colors">Khalsa Academy</a></li>
           <li><a href="livestream/" class="hover:text-white transition-colors">Livestream</a></li>
           <li><a href="contact/"    class="hover:text-white transition-colors">Contact &amp; Directions</a></li>
         </ul>
       </div>
 
-      <!-- Column 3: Sangat hours -->
+      <!-- Column 3: Daily programme (editable in the admin) -->
       <div>
         <h3 class="font-semibold text-saffron-400 mb-4 uppercase tracking-wide text-xs">Daily Programs</h3>
-        <p class="text-sm text-gray-300 leading-relaxed">
-          Open daily 5:00 AM – 8:30 PM.<br><br>
-          <span class="text-white font-medium">Morning — 7 days</span><br>
-          Nitnem · Asa Di Vaar · Ardas · Hukamnama<br><br>
-          <span class="text-white font-medium">Evening — 7 days</span><br>
-          Rehrass Sahib · Kirtan · Katha · Ardas<br><br>
-          <span class="text-white font-medium">Wednesday &amp; Friday</span><br>
-          Sukhmani Sahib · Rehrass Sahib · Kirtan<br><br>
-          Langar (free community meal) served daily.
-        </p>
+        <div class="text-sm text-gray-300 leading-relaxed space-y-3">
+          <p>Open daily 5:00 AM – 8:30 PM</p>
+          
+          <p>
+            <span class="text-white font-medium">Morning Program</span> — Daily<br>
+            Nitnem · Asa Di Vaar · Ardas · Hukamnama
+          </p>
+          
+          <p>
+            <span class="text-white font-medium">Evening Program</span> — Daily<br>
+            Rehrass Sahib · Aarti · Kirtan · Katha · Ardas · Hukamnama · Kirtan Sohila · Samapti
+          </p>
+          
+          <p>
+            <span class="text-white font-medium">Wednesday &amp; Friday</span> — Additional program<br>
+            Sukhmani Sahib · Rehrass Sahib · Kirtan · Katha · Ardas · Hukamnama · Kirtan Sohila
+          </p>
+          
+        </div>
       </div>
     </div>
 
     <div class="border-t border-white/10 pt-8 text-center">
       <p class="text-saffron-400 font-medium gurmukhi">ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ, ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਹਿ</p>
       <p class="text-gray-500 text-xs mt-1">Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh</p>
-      <p class="text-gray-600 text-xs mt-4">© 2026 El Sobrante Gurdwara Sahib. All are welcome.</p>
+      <p class="text-gray-600 text-xs mt-4">© 2026 Sikh Center of SF Bay Area. All are welcome.</p>
+      
+      <p class="text-gray-600 text-xs mt-1">Photo: Coro, CC BY-SA 3.0, via Wikimedia Commons</p>
+      
     </div>
   </div>
 </footer>
 
 <script>
   // Mobile menu toggle
-  const btn  = document.getElementById("menu-btn");
-  const menu = document.getElementById("mobile-menu");
-  const iconOpen  = document.getElementById("icon-open");
-  const iconClose = document.getElementById("icon-close");
+  (function () {
+    const btn  = document.getElementById("menu-btn");
+    const menu = document.getElementById("mobile-menu");
+    const iconOpen  = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+    if (!btn || !menu) return;
 
-  btn.addEventListener("click", () => {
-    const open = menu.classList.toggle("hidden");
-    iconOpen.classList.toggle("hidden", !open);
-    iconClose.classList.toggle("hidden", open);
-    btn.setAttribute("aria-expanded", String(!open));
-  });
+    btn.addEventListener("click", () => {
+      const nowHidden = menu.classList.toggle("hidden");
+      iconOpen.classList.toggle("hidden", !nowHidden);
+      iconClose.classList.toggle("hidden", nowHidden);
+      btn.setAttribute("aria-expanded", String(!nowHidden));
+    });
+  })();
 </script>
+
 </body>
 </html>
