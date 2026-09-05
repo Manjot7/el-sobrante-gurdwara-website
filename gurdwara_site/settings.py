@@ -36,6 +36,12 @@ CSRF_TRUSTED_ORIGINS = [
     if o.strip()
 ]
 
+# Trust the host's own domain for admin logins. Without this, signing in to
+# the admin on a fresh deploy can fail with "CSRF verification failed" — a
+# confusing wall for whoever is setting the site up.
+if _render_host:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{_render_host}")
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
