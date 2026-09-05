@@ -18,7 +18,7 @@ Three lists:
 | 4 | **Academy fee amount removed.** Mockup said "$40 per child"; unverified | `templates/academy.html` | The correct amount, or leave it off |
 | 5 | **"Khalsa Academy"** — renamed from "Khalsa School" for the registration concern | Throughout | Confirmation this wording is acceptable |
 | 6 | **Calendar not connected.** Events page shows a "not connected yet" notice instead of a calendar | *Gurdwara details* → Google Calendar ID | The Calendar ID (task B below) |
-| 7 | **Two example events** — "Monthly Sukhmani Sahib Paath" and "Akhand Paath Sahib", both marked as examples in their description | `Event` records | Delete once real events are added |
+| 7 | **No events listed.** The Events page shows its empty state until someone adds one in the admin | `Event` records | A few real upcoming events |
 | 8 | **Class levels** — Beginners 5–7, Intermediate 8–10, Advanced 11–14 | `templates/academy.html` | Confirm or correct |
 | 9 | **Founding year 1969.** Wikipedia says the Center formed 31 Dec 1968, building opened May 1979 | `templates/home.html` | Decide which to print |
 | 10 | **Donate page not built** — deliberately, pending the decisions in task E | — | Answers to task E |
@@ -129,7 +129,7 @@ Sat Sri Akal everyone. The new website is ready to look at. We need a few things
 
 16. Please confirm: phones (510) 223-9987 and (510) 223-1102, email info@thesikhcenter.com, address 3550 Hillcrest Rd, open daily 5:00 AM to 8:30 PM.
 
-17. There are 2 example events on the Events page just to show what an event looks like. We will delete them before launch.
+17. The Events section is empty until we add some. Please send a few upcoming programs and we will put them in.
 
 18. Please read the About text on the homepage and the Academy page and tell us anything you want worded differently.
 
@@ -143,7 +143,6 @@ Thank you. Once we have these we can put the site live.
 
 **Still to do once the answers arrive**
 
-1. Delete the two example events in the admin.
 2. Upload real photos; delete the Wikipedia photo — its credit line disappears from the footer automatically once no active photo has a credit.
 3. Paste the Google Calendar ID into *Gurdwara details*.
 4. Restore the Academy coordinator block with real details.
