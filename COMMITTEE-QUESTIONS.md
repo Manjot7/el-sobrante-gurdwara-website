@@ -22,7 +22,7 @@ Three lists:
 | 8 | **Class levels** — Beginners 5–7, Intermediate 8–10, Advanced 11–14 | `templates/academy.html` | Confirm or correct |
 | 9 | **Founding year 1969.** Wikipedia says the Center formed 31 Dec 1968, building opened May 1979 | `templates/home.html` | Decide which to print |
 | 10 | **Donate page not built** — deliberately, pending the decisions in task E | — | Answers to task E |
-| 11 | **Local-only security key.** Site still runs with a development `SECRET_KEY` and `DEBUG=True` | `gurdwara_site/settings.py` | Set `DJANGO_SECRET_KEY` and `DJANGO_DEBUG=false` on the host before launch |
+| 11 | ~~Security key / DEBUG~~ — **done.** The host generates its own `SECRET_KEY` and runs with `DEBUG=false`. The development defaults apply only to a local machine | — | nothing |
 
 Details that were carried over from the mockup and are **believed correct**, but nobody has confirmed: phone numbers (510) 223-9987 and (510) 223-1102, email info@thesikhcenter.com, address 3550 Hillcrest Rd, opening hours 5:00 AM – 8:30 PM, YouTube channel, Facebook page.
 
