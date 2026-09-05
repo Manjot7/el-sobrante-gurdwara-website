@@ -30,3 +30,6 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Static export. Built locally for previews; not published from this repo.
+/docs/
