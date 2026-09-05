@@ -1,13 +1,16 @@
 """
-Render the site to static HTML in docs/ for GitHub Pages.
+Render the site to static HTML in docs/ for any static host.
 Run with: python build_static.py
 
-This exists to give the committee a clickable link during review without
-standing up a server. It is a *snapshot* of whatever is in the database at the
-time it runs — the admin, the calendar sync and photo uploads all need the real
-Django app. Retire this once the site is live on a proper host.
+This is a *snapshot* of whatever is in the database when it runs. It's for
+showing people the site without standing up a server — the admin, photo
+uploads and the calendar all need the real Django app.
+
+Output uses relative paths only, with no <base> tag, so the docs/ folder can
+be dropped on GitHub Pages, Netlify, or opened from disk without changes.
 """
 import os
+import re
 import shutil
 from pathlib import Path
 
@@ -19,42 +22,41 @@ django.setup()
 from django.conf import settings
 from django.test import Client
 
-BASE_URL = "https://manjot7.github.io/el-sobrante-gurdwara-website"
-
+# url -> output path. The depth of the output path decides how many "../"
+# steps are needed to get back to the root.
 PAGES = {
-    "/":             "index.html",
-    "/schedule/":    "schedule/index.html",
-    "/events/":      "events/index.html",
-    "/academy/":     "academy/index.html",
-    "/livestream/":  "livestream/index.html",
-    "/contact/":     "contact/index.html",
+    "/":            "index.html",
+    "/schedule/":   "schedule/index.html",
+    "/events/":     "events/index.html",
+    "/academy/":    "academy/index.html",
+    "/livestream/": "livestream/index.html",
+    "/contact/":    "contact/index.html",
 }
 
-# Root-relative URLs → base-relative, so <base href> resolves them correctly
-# from any subdirectory page.
-LINK_FIXES = [
-    ('href="/"',             'href="./"'),
-    ("href='/'",             "href='./'"),
-]
-for route in ("schedule", "events", "academy", "livestream", "contact"):
-    LINK_FIXES.append((f'href="/{route}/"', f'href="{route}/"'))
-    LINK_FIXES.append((f"href='/{route}/'", f"href='{route}/'"))
-# Uploaded photos and icons live alongside the pages in docs/.
-LINK_FIXES += [
-    ('="/static/', '="static/'),
-    ('="/media/',  '="media/'),
-]
+ROUTES = ["schedule", "events", "academy", "livestream", "contact"]
 
 
-def fix_html(html: str) -> str:
-    for old, new in LINK_FIXES:
-        html = html.replace(old, new)
-    return html.replace("<head>", f'<head>\n  <base href="{BASE_URL}/">', 1)
+def to_relative(html: str, depth: int) -> str:
+    """Rewrite root-relative URLs to paths relative to this page."""
+    prefix = "../" * depth
+
+    for route in ROUTES:
+        html = html.replace(f'href="/{route}/"', f'href="{prefix}{route}/"')
+        html = html.replace(f"href='/{route}/'", f"href='{prefix}{route}/'")
+
+    # Home link: "./" at the root, "../" from a subdirectory.
+    html = html.replace('href="/"', f'href="{prefix or "./"}"')
+    html = html.replace("href='/'", f"href='{prefix or './'}'")
+
+    # Assets, in any attribute (src=, href=, content=).
+    html = re.sub(r'(["\'])/(static|media)/', rf'\1{prefix}\2/', html)
+
+    return html
 
 
 docs = Path("docs")
 docs.mkdir(exist_ok=True)
-(docs / ".nojekyll").touch()  # stop Jekyll mangling the output
+(docs / ".nojekyll").touch()  # stop Jekyll mangling the output on GitHub Pages
 
 client = Client()
 for url, filename in PAGES.items():
@@ -63,7 +65,10 @@ for url, filename in PAGES.items():
         raise SystemExit(f"  {url} returned {response.status_code} — aborting")
     out = docs / filename
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(fix_html(response.content.decode("utf-8")), encoding="utf-8")
+    depth = len(Path(filename).parts) - 1
+    out.write_text(
+        to_relative(response.content.decode("utf-8"), depth), encoding="utf-8"
+    )
     print(f"  {url:14s} -> docs/{filename}")
 
 # Without these the snapshot has no favicon and no photos.
@@ -79,4 +84,4 @@ for label, source, dest in [
     count = sum(1 for _ in dest.rglob("*") if _.is_file())
     print(f"  {label:14s} -> docs/{dest.name}/ ({count} files)")
 
-print("Static build complete.")
+print("\nStatic build complete. The docs/ folder works on any static host.")
