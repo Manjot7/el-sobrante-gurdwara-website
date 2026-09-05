@@ -12,6 +12,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group, Permission, User
 from django.urls import reverse
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 
 from .models import Event, Photo, ProgramItem, SiteSettings
 
@@ -23,7 +24,7 @@ admin.site.index_title = "What would you like to update?"
 def _thumb(image, height=52):
     """Small preview so photos are recognised by sight, not by filename."""
     if not image:
-        return format_html('<span style="color:#999">No photo</span>')
+        return mark_safe('<span style="color:#999">No photo</span>')
     return format_html(
         '<img src="{}" style="height:{}px;width:auto;border-radius:4px;'
         'object-fit:cover;box-shadow:0 1px 3px rgba(0,0,0,.25)">',
@@ -84,10 +85,10 @@ class EventAdmin(admin.ModelAdmin):
     @admin.display(description="On the website?")
     def status(self, obj):
         if obj.is_past:
-            return format_html(
+            return mark_safe(
                 '<span style="color:#999">Finished — hidden automatically</span>'
             )
-        return format_html('<span style="color:#137333">Showing</span>')
+        return mark_safe('<span style="color:#137333">Showing</span>')
 
 
 @admin.register(ProgramItem)
