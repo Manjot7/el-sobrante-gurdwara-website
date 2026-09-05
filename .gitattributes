@@ -1,0 +1,8 @@
+# Shell scripts must keep LF endings no matter what the checkout platform
+# does. A CRLF build.sh fails on Linux with "bad interpreter: ...^M", which
+# is a confusing way for a deploy to break.
+*.sh text eol=lf
+
+# Same reasoning for anything the host reads directly.
+*.yaml text eol=lf
+*.yml  text eol=lf
