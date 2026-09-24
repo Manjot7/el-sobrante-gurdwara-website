@@ -86,6 +86,19 @@ in all three places at once.
 Name, address, phone numbers, email, the Google Calendar ID, the YouTube
 channel. Change a phone number here and it updates everywhere on the site.
 
+### Text on the pages
+The wording on the public pages — the About section, each page's heading, and
+the two lists on the Contact page. Pick a block by name, rewrite the words,
+save. Leave a blank line between paragraphs. For the two Contact lists, put
+each point on its own line.
+
+You cannot add or delete blocks here, only reword the ones that exist — so
+there is no way to accidentally remove a section of the site.
+
+### Facts on the home page
+The short facts under the About text: "1969 / Year established" and so on.
+Add, remove and reorder these freely.
+
 ---
 
 ## The livestream looks after itself
@@ -100,9 +113,16 @@ its own "no stream" message.
 
 ## Adding a new committee member to the admin
 
-Ask whoever maintains the site. They'll create the login and add it to the
-**"Website editors"** group, which gives access to the four things above and
-nothing else — no ability to change accounts or break the site.
+The site owner (the account that set the site up) can do this without a
+developer:
+
+1. Log in at `/admin` — you'll see a **Users** section that editors don't
+2. **Users → Add user**, set a username and password
+3. Save, then on the next screen tick **Staff status**
+4. Under **Groups**, add them to **Website editors** and save
+
+That gives them everything listed above and nothing else — they cannot change
+accounts, permissions, or anything that would break the site.
 
 ---
 

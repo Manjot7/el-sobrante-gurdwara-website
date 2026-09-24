@@ -13,13 +13,13 @@ Three lists:
 | # | Placeholder | Where it is | What it needs |
 |---|---|---|---|
 | 1 | **Only one photo** in the homepage slideshow, taken from Wikipedia under a licence that forces a credit line into the footer | `Photo` records, category *Home page slideshow* | Real photos of the building, hall, langar hall and grounds. Once added, delete the Wikipedia one and the credit disappears |
-| 2 | **No Academy photos at all** — that section and the class-photo column hide themselves entirely | `Photo`, category *Khalsa Academy gallery* | Any class or event photos |
-| 3 | **Academy coordinator contact removed.** The mockup had an invented name, phone and email. Page now says to call the Gurdwara | `templates/academy.html` | Real name, phone, email |
-| 4 | **Academy fee amount removed.** Mockup said "$40 per child"; unverified | `templates/academy.html` | The correct amount, or leave it off |
-| 5 | **"Khalsa Academy"** — renamed from "Khalsa School" for the registration concern | Throughout | Confirmation this wording is acceptable |
+| 2 | ~~Academy photos~~ — **section removed** until the committee supplies real details | — | see row 5 |
+| 3 | ~~Academy coordinator~~ — **page removed entirely** rather than ship invented details | — | see row 5 |
+| 4 | ~~Academy fee~~ — **page removed** | — | see row 5 |
+| 5 | **The whole Academy page is gone for now.** It will be rebuilt once the committee sends the real name, coordinator contact, fee and class levels | — | Name, coordinator, fee, class levels |
 | 6 | **Calendar not connected.** Events page shows a "not connected yet" notice instead of a calendar | *Gurdwara details* → Google Calendar ID | The Calendar ID (task B below) |
 | 7 | **No events listed.** The Events page shows its empty state until someone adds one in the admin | `Event` records | A few real upcoming events |
-| 8 | **Class levels** — Beginners 5–7, Intermediate 8–10, Advanced 11–14 | `templates/academy.html` | Confirm or correct |
+| 8 | ~~Class levels~~ — **page removed** | — | see row 5 |
 | 9 | **Founding year 1969.** Wikipedia says the Center formed 31 Dec 1968, building opened May 1979 | `templates/home.html` | Decide which to print |
 | 10 | **Donate page not built** — deliberately, pending the decisions in task E | — | Answers to task E |
 | 11 | ~~Security key / DEBUG~~ — **done.** The host generates its own `SECRET_KEY` and runs with `DEBUG=false`. The development defaults apply only to a local machine | — | nothing |
