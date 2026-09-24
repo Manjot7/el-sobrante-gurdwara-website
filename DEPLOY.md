@@ -150,3 +150,97 @@ setup is manual (no `render.yaml` equivalent, you configure the web app by
 hand) and updates need a manual pull rather than a git push. Worth it if the
 committee will be poking at the site over several days rather than one sitting.
 Say the word and I'll write those steps out.
+
+---
+
+# Putting the site on the gurdwara's own domain
+
+## Do this first: leave the free plan
+
+The free plan is fine for showing people a preview. It is **not** fine once
+the site is at the gurdwara's real address:
+
+- **It sleeps.** After 15 idle minutes the next visitor waits ~50 seconds
+  looking at nothing. Most people assume the site is broken and leave.
+- **Uploads are deleted.** Every restart and deploy wipes the disk. A Vaisakhi
+  poster added in the admin will disappear without warning.
+
+Fix both at once — Render → the service → **Settings**:
+
+1. **Instance Type** → **Starter** (~$7/month). Stops the sleeping.
+2. **Disks** → **Add Disk**, mount path `/data`, 1 GB. Keeps the uploads.
+3. **Environment** → add `DJANGO_DATA_DIR` = `/data`
+
+> Step 3 moves the database onto the new disk, which starts empty — so
+> anything already added through the admin is left behind. Do this **before**
+> the committee starts adding content, not after. The build re-seeds the
+> history photos and programme, and recreates the admin login from the
+> `DJANGO_SUPERUSER_*` variables.
+
+## Then point the domain
+
+Replace `YOURDOMAIN.org` with the real one throughout.
+
+### 1. Tell Render about the domain
+
+Service → **Settings** → **Custom Domains** → **Add Custom Domain**.
+
+Add **both**:
+- `YOURDOMAIN.org`
+- `www.YOURDOMAIN.org`
+
+Render then shows the exact DNS records to create. Use the values Render
+displays — don't copy them from anywhere else, they differ per service.
+
+### 2. Tell Django about the domain — *do this before the DNS*
+
+Environment → add:
+
+```
+DJANGO_ALLOWED_HOSTS=YOURDOMAIN.org,www.YOURDOMAIN.org
+```
+
+Django refuses any hostname not in this list with a bare **"Bad Request
+(400)"**. Setting it first means the site works the instant DNS resolves,
+rather than serving errors while you work out why.
+
+Nothing else is needed — form submissions and admin logins are trusted for
+every host in this list automatically.
+
+### 3. Add the DNS records at GoDaddy
+
+**My Products** → the domain → **DNS** → **Manage DNS**.
+
+| Type | Name | Value |
+|---|---|---|
+| CNAME | `www` | the `.onrender.com` hostname Render showed you |
+| A | `@` | the IP address Render showed you |
+
+Then **delete any existing `A` or `CNAME` records for `@` and `www`** that
+GoDaddy created for its parking page. Leaving them causes the domain to
+resolve intermittently to the wrong place, which is confusing to debug.
+
+Do **not** use GoDaddy's "Forwarding" feature. That points the domain at
+another URL instead of hosting the site, and breaks HTTPS.
+
+### 4. Wait for the certificate
+
+Render issues a free SSL certificate automatically once it can see the DNS.
+Usually a few minutes; occasionally up to an hour. The custom domain shows as
+**Verified** in Render when it's done.
+
+Until then the site may show a certificate warning. That's expected — don't
+send the link to anyone yet.
+
+## Checking it worked
+
+- `https://YOURDOMAIN.org` loads with a padlock, no warning
+- `https://www.YOURDOMAIN.org` does the same
+- `/admin` lets you log in (a CSRF error here means step 2 was missed)
+- Upload a photo, redeploy, confirm it is still there — proves the disk works
+
+## What about thesikhcenter.com?
+
+Separate decision. It currently runs a different site on someone else's
+server. Options: leave it alone, redirect it to the new domain, or move it
+across. Redirecting needs whoever administers that server, not GoDaddy.
