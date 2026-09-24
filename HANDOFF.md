@@ -6,7 +6,7 @@ technical knowledge.
 There are only **two** places anything is ever changed:
 
 1. **Google Calendar** — paths, bookings, anything with a date
-2. **The website admin** — photos, the daily programme, phone numbers
+2. **The website admin** — photos, events, the programme, the wording, phone numbers
 
 That's it. Nothing else on the site needs touching.
 
@@ -50,13 +50,12 @@ Nobody needs to enter them.
 
 Go to **yoursite.com/admin** and log in.
 
-You'll see four things:
+You'll see six things:
 
 ### Photos on the website
 Add a photo, then pick where it goes:
 - **Home page slideshow** — the big photos at the top of the homepage
 - **History (About section)** — the old photos in the history carousel
-- **Khalsa Academy gallery** — class photos
 
 Big photos straight off a phone are fine — they're shrunk automatically.
 
