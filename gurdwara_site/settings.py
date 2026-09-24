@@ -36,11 +36,20 @@ CSRF_TRUSTED_ORIGINS = [
     if o.strip()
 ]
 
-# Trust the host's own domain for admin logins. Without this, signing in to
-# the admin on a fresh deploy can fail with "CSRF verification failed" — a
-# confusing wall for whoever is setting the site up.
-if _render_host:
-    CSRF_TRUSTED_ORIGINS.append(f"https://{_render_host}")
+# Every hostname the site answers to is also trusted for form submissions.
+#
+# Django needs the domain in two places: ALLOWED_HOSTS to serve the page at
+# all, and CSRF_TRUSTED_ORIGINS to accept a login. Keeping those in step by
+# hand is a trap — miss the second and the site loads fine but signing in to
+# the admin fails with "CSRF verification failed", which says nothing about
+# the real cause. Deriving one from the other means adding a custom domain is
+# a single environment variable.
+for _host in ALLOWED_HOSTS:
+    if _host == "*":
+        continue
+    _origin = f"https://*{_host}" if _host.startswith(".") else f"https://{_host}"
+    if _origin not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(_origin)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
