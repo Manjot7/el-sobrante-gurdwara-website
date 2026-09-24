@@ -9,12 +9,13 @@ Design rules for anything added here:
 """
 
 from django.contrib import admin
+from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from django.contrib.auth.models import Group, Permission, User
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from .models import Event, Photo, ProgramItem, SiteSettings
+from .models import Event, PageText, Photo, ProgramItem, SiteSettings, Stat
 
 admin.site.site_header = "Sikh Center of SF Bay Area"
 admin.site.site_title = "Website admin"
@@ -161,11 +162,68 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         )
 
 
-# Editors manage content only. Hiding these keeps the admin home page down to
-# the four things they actually need, and keeps account management with the
-# site owner.
-admin.site.unregister(Group)
+@admin.register(PageText)
+class PageTextAdmin(admin.ModelAdmin):
+    """Fixed set of rows — editors reword them, they never add or remove one."""
+
+    list_display = ("__str__", "heading", "preview")
+    fields = ("heading", "body")
+    ordering = ("sort_order",)
+    save_on_top = True
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    @admin.display(description="Text")
+    def preview(self, obj):
+        text = " ".join(obj.body.split())
+        return (text[:90] + "…") if len(text) > 90 else (text or "—")
+
+
+@admin.register(Stat)
+class StatAdmin(admin.ModelAdmin):
+    list_display = ("value", "label", "sort_order", "is_active")
+    list_editable = ("sort_order", "is_active")
+    ordering = ("sort_order",)
+    save_on_top = True
+
+
+# Account management belongs to whoever owns the site, not to editors — but
+# hiding it from everyone meant nobody could add a committee login without a
+# developer, which defeats the point of handing the site over. So: visible to
+# superusers, invisible to editors.
+class _SuperuserOnlyMixin:
+    def has_module_permission(self, request):
+        return request.user.is_superuser
+
+    def has_view_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_add_permission(self, request):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+
 admin.site.unregister(User)
+admin.site.unregister(Group)
+
+
+@admin.register(User)
+class RestrictedUserAdmin(_SuperuserOnlyMixin, UserAdmin):
+    pass
+
+
+@admin.register(Group)
+class RestrictedGroupAdmin(_SuperuserOnlyMixin, GroupAdmin):
+    pass
 
 
 EDITOR_GROUP_NAME = "Website editors"
@@ -185,7 +243,10 @@ def ensure_editor_group():
             "add_event", "change_event", "delete_event", "view_event",
             "add_programitem", "change_programitem", "delete_programitem",
             "view_programitem",
+            "add_stat", "change_stat", "delete_stat", "view_stat",
+            # Singletons and fixed rows: editable, never added or deleted.
             "change_sitesettings", "view_sitesettings",
+            "change_pagetext", "view_pagetext",
         ],
     )
     group.permissions.set(perms)

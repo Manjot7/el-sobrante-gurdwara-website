@@ -7,9 +7,9 @@
 <section class="bg-navy-800 text-white py-14">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">{{ site.name }}</p>
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">Contact &amp; Directions</h1>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">{{ text.contact_header.heading }}</h1>
     <p class="text-gray-300 text-sm">
-      {{ site.address_line1 }}, {{ site.address_line2 }}. All are welcome.
+      {{ site.address_line1 }}, {{ site.address_line2 }}. {{ text.contact_header.body }}
     </p>
   </div>
 </section>
@@ -114,22 +114,20 @@
   <div class="grid md:grid-cols-2 gap-8">
 
     <div class="bg-gray-50 rounded-xl p-6">
-      <h3 class="font-bold text-navy-800 mb-4">Parking &amp; Access</h3>
+      <h3 class="font-bold text-navy-800 mb-4">{{ text.contact_parking.heading }}</h3>
       <ul class="space-y-2 text-sm text-gray-600">
-        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Free on-site parking lot on Hillcrest Rd</li>
-        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Located in the hills of El Sobrante, 25 miles north of San Francisco</li>
-        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Panoramic views of the El Sobrante valley and San Pablo Bay from the grounds</li>
-        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> {{ site.opening_hours }}</li>
+        {% for point in text.contact_parking.lines %}
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> {{ point }}</li>
+        {% endfor %}
       </ul>
     </div>
 
     <div class="bg-gray-50 rounded-xl p-6">
-      <h3 class="font-bold text-navy-800 mb-4">What to Expect</h3>
+      <h3 class="font-bold text-navy-800 mb-4">{{ text.contact_expect.heading }}</h3>
       <ul class="space-y-2 text-sm text-gray-600">
-        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Head coverings required inside the Darbar Sahib (available at entry)</li>
-        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Shoes removed before entering (racks provided at the entrance)</li>
-        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> Langar (free meal) served after Sunday Diwan — all are welcome</li>
-        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> All faiths and backgrounds welcome — no prior knowledge of Sikhism needed</li>
+        {% for point in text.contact_expect.lines %}
+        <li class="flex items-start gap-2"><span class="text-saffron-500 flex-shrink-0 mt-0.5">✓</span> {{ point }}</li>
+        {% endfor %}
       </ul>
     </div>
 

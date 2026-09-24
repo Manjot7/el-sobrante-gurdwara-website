@@ -35,15 +35,6 @@ def events(request):
     })
 
 
-def academy(request):
-    return render(request, "academy.html", {
-        "current_page": "academy",
-        "academy_photos": Photo.objects.filter(
-            category=Photo.ACADEMY, is_active=True
-        ),
-        **_common(),
-    })
-
 
 def livestream(request):
     return render(request, "livestream.html", {

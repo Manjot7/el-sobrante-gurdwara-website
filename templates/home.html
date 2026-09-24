@@ -36,7 +36,7 @@
 <!-- ── QUICK LINKS ─────────────────────────────────────────────────────────── -->
 <section class="bg-saffron-500 py-6">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
 
       <a href="/schedule/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors">
         <span class="text-2xl flex-shrink-0">📅</span>
@@ -54,13 +54,6 @@
         </div>
       </a>
 
-      <a href="/academy/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors">
-        <span class="text-2xl flex-shrink-0">📖</span>
-        <div>
-          <div class="font-semibold text-sm leading-tight">Khalsa Academy</div>
-          <div class="text-xs text-white/70">Punjabi · Gurmukhi</div>
-        </div>
-      </a>
 
       <a href="/contact/" class="bg-white/15 hover:bg-white/25 text-white rounded-xl px-4 py-4 flex items-center gap-3 transition-colors">
         <span class="text-2xl flex-shrink-0">📍</span>
@@ -79,40 +72,23 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="max-w-3xl">
       <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-6 leading-tight">
-        About the Gurdwara
+        {{ text.home_about.heading }}
       </h2>
       <div class="space-y-4 text-gray-600 leading-relaxed">
-        <p>
-          The {{ site.name }} — home of Gurdwara Sahib El Sobrante — has been
-          serving the Bay Area Sikh community since its establishment in 1969. What began as
-          informal gatherings in Berkeley grew into a formal organization with one purpose: to give the
-          Bay Area's growing Sikh population a dedicated place of worship.
-        </p>
-        <p>
-          In 1976, approximately five acres of hillside in El Sobrante were purchased for the Gurdwara.
-          The first building phase was completed in May 1979, and the current structure, with its
-          golden domes and views over the El Sobrante valley and San Pablo Bay, was completed in
-          June 1992.
-        </p>
-        <p>
-          Rooted in the teachings of Sri Guru Granth Sahib Ji, the Gurdwara is open to all regardless
-          of faith or background. Langar — a free community meal — is served daily to every visitor.
-        </p>
+        {% for paragraph in text.home_about.paragraphs %}
+        <p>{{ paragraph }}</p>
+        {% endfor %}
       </div>
+      {% if stats %}
       <div class="mt-8 flex flex-wrap gap-8 text-sm">
+        {% for stat in stats %}
         <div>
-          <div class="text-3xl font-bold text-saffron-500">1969</div>
-          <div class="text-gray-500">Year established</div>
+          <div class="text-3xl font-bold text-saffron-500">{{ stat.value }}</div>
+          <div class="text-gray-500">{{ stat.label }}</div>
         </div>
-        <div>
-          <div class="text-3xl font-bold text-saffron-500">5 acres</div>
-          <div class="text-gray-500">Hilltop grounds<br>in El Sobrante</div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-saffron-500">Daily</div>
-          <div class="text-gray-500">Free langar<br>for all visitors</div>
-        </div>
+        {% endfor %}
       </div>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -215,15 +191,14 @@
 
       <div>
         <p class="text-saffron-600 font-semibold uppercase tracking-widest text-xs mb-2">Visit Us</p>
-        <h2 class="text-2xl font-bold text-navy-900 mb-4">Find the Gurdwara</h2>
+        <h2 class="text-2xl font-bold text-navy-900 mb-4">{{ text.home_visit.heading }}</h2>
         <address class="not-italic text-gray-600 mb-4 leading-relaxed">
           <strong class="text-navy-800 font-semibold">{{ site.name }}</strong><br>
           {{ site.address_line1 }}<br>
           {{ site.address_line2 }}
         </address>
         <p class="text-sm text-gray-500 mb-6">
-          Situated in the hills of El Sobrante, 25 miles north of San Francisco.
-          Free parking available on-site.{% if site.opening_hours %} {{ site.opening_hours }}.{% endif %}
+          {{ text.home_visit.body }}{% if site.opening_hours %} {{ site.opening_hours }}.{% endif %}
         </p>
         <a href="{{ site.maps_directions_url }}" target="_blank" rel="noopener"
            class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-sm">

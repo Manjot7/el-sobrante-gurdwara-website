@@ -10,6 +10,7 @@ Field help_text throughout is written for a committee member who has never used
 a CMS. Please keep it that way when adding fields.
 """
 
+import re
 from io import BytesIO
 
 from django.core.files.base import ContentFile
@@ -258,11 +259,9 @@ class Photo(ImageProcessingMixin, models.Model):
 
     HERO = "hero"
     HISTORY = "history"
-    ACADEMY = "academy"
     CATEGORY_CHOICES = [
         (HERO, "Home page slideshow"),
         (HISTORY, "History (About section)"),
-        (ACADEMY, "Khalsa Academy gallery"),
     ]
 
     image_fields = ("image",)
@@ -289,8 +288,8 @@ class Photo(ImageProcessingMixin, models.Model):
         max_length=200,
         blank=True,
         help_text="A short description of the photo. Always read out by screen "
-        "readers. Shown on the page for History and Academy photos; the home "
-        "page slideshow deliberately shows no text.",
+        "readers. Shown under History photos; the home page slideshow "
+        "deliberately shows no text.",
     )
     credit = models.CharField(
         "Photo credit",
@@ -411,3 +410,107 @@ class ProgramItem(models.Model):
 
     def __str__(self):
         return self.heading
+
+
+class PageText(models.Model):
+    """Wording on the public pages, editable without touching code.
+
+    The rows are fixed — created by `seed_content` and neither added to nor
+    deleted in the admin. An editor picks a block by its plain-English name and
+    rewrites the words; they never have to think about pages, keys or layout.
+    """
+
+    HOME_ABOUT = "home_about"
+    HOME_VISIT = "home_visit"
+    SCHEDULE_HEADER = "schedule_header"
+    EVENTS_HEADER = "events_header"
+    EVENTS_CALENDAR = "events_calendar"
+    LIVESTREAM_HEADER = "livestream_header"
+    LIVESTREAM_PROGRAM = "livestream_program"
+    CONTACT_HEADER = "contact_header"
+    CONTACT_PARKING = "contact_parking"
+    CONTACT_EXPECT = "contact_expect"
+
+    KEY_CHOICES = [
+        (HOME_ABOUT, "Home — About the Gurdwara"),
+        (HOME_VISIT, "Home — Visit us"),
+        (SCHEDULE_HEADER, "Schedule — page heading"),
+        (EVENTS_HEADER, "Events — page heading"),
+        (EVENTS_CALENDAR, "Events — calendar section"),
+        (LIVESTREAM_HEADER, "Livestream — page heading"),
+        (LIVESTREAM_PROGRAM, "Livestream — daily program box"),
+        (CONTACT_HEADER, "Contact — page heading"),
+        (CONTACT_PARKING, "Contact — parking & access"),
+        (CONTACT_EXPECT, "Contact — what to expect"),
+    ]
+
+    # Blocks whose body is a list of points, one per line, rather than prose.
+    LIST_KEYS = {CONTACT_PARKING, CONTACT_EXPECT}
+
+    key = models.CharField(max_length=40, choices=KEY_CHOICES, unique=True)
+    heading = models.CharField(
+        max_length=200, blank=True, help_text="The bold line above the text."
+    )
+    body = models.TextField(
+        "Text",
+        blank=True,
+        help_text=(
+            "Leave a blank line between paragraphs. For the two Contact lists, "
+            "put each point on its own line."
+        ),
+    )
+    sort_order = models.PositiveIntegerField(default=0, editable=False)
+
+    class Meta:
+        ordering = ["sort_order", "key"]
+        verbose_name = "Page text"
+        verbose_name_plural = "Text on the pages"
+
+    def __str__(self):
+        return self.get_key_display()
+
+    @property
+    def paragraphs(self):
+        """Body split into paragraphs on blank lines."""
+        chunks, current = [], []
+        for line in self.body.splitlines():
+            if line.strip():
+                current.append(line.strip())
+            elif current:
+                chunks.append(" ".join(current))
+                current = []
+        if current:
+            chunks.append(" ".join(current))
+        return chunks
+
+    @property
+    def lines(self):
+        """Body split into one entry per line, for the bullet lists."""
+        return [line.strip() for line in self.body.splitlines() if line.strip()]
+
+
+class Stat(models.Model):
+    """The short facts under the About text — '1969 / Year established'."""
+
+    value = models.CharField(
+        max_length=40, help_text="The big text, e.g. '1969' or '5 acres'."
+    )
+    label = models.CharField(
+        max_length=80, help_text="The small text underneath, e.g. 'Year established'."
+    )
+    sort_order = models.PositiveIntegerField(
+        "Order", default=0, help_text="Lower numbers show first."
+    )
+    is_active = models.BooleanField(
+        "Show on the website",
+        default=True,
+        help_text="Untick to hide without deleting.",
+    )
+
+    class Meta:
+        ordering = ["sort_order", "id"]
+        verbose_name = "Fact"
+        verbose_name_plural = "Facts on the home page"
+
+    def __str__(self):
+        return f"{self.value} — {self.label}"

@@ -7,9 +7,9 @@
 <section class="bg-navy-800 text-white py-14">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">{{ site.name }}</p>
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">Daily Programme</h1>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">{{ text.schedule_header.heading }}</h1>
     <p class="text-gray-300 text-sm">
-      {% if site.opening_hours %}{{ site.opening_hours }}. {% endif %}Langar is served daily to all visitors.
+      {% if site.opening_hours %}{{ site.opening_hours }}. {% endif %}{{ text.schedule_header.body }}
     </p>
   </div>
 </section>

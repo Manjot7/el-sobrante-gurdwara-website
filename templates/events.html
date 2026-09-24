@@ -7,10 +7,8 @@
 <section class="bg-navy-800 text-white py-14">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">{{ site.name }}</p>
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">Events &amp; Calendar</h1>
-    <p class="text-gray-300 text-sm">
-      Upcoming programs, Gurpurabs, and the paths booked by the sangat.
-    </p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">{{ text.events_header.heading }}</h1>
+    <p class="text-gray-300 text-sm">{{ text.events_header.body }}</p>
   </div>
 </section>
 
@@ -39,11 +37,8 @@
        Calendar itself; whatever they enter appears here automatically.
   ──────────────────────────────────────────────────────────────────────────── -->
   <section>
-    <h2 class="text-2xl font-bold text-navy-900 mb-2">Gurdwara Calendar</h2>
-    <p class="text-gray-500 text-sm mb-6">
-      Akhand Paath, Sehaj Paath, Sukhmani Sahib and Anand Karaj bookings, alongside
-      Gurpurab and Nanakshahi dates.
-    </p>
+    <h2 class="text-2xl font-bold text-navy-900 mb-2">{{ text.events_calendar.heading }}</h2>
+    <p class="text-gray-500 text-sm mb-6">{{ text.events_calendar.body }}</p>
 
     {% if site.calendar_embed_url %}
     <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">

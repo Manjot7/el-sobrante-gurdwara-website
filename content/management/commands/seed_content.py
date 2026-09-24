@@ -11,7 +11,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 
-from content.models import Photo, ProgramItem, SiteSettings
+from content.models import PageText, Photo, ProgramItem, SiteSettings, Stat
 
 # Ordered roughly chronologically, so the carousel tells the story in sequence.
 # The captions are already printed into these scans, so the caption stored here
@@ -40,6 +40,47 @@ HERO_PHOTOS = [
         "Photo: Coro, CC BY-SA 3.0, via Wikimedia Commons",
     ),
 ]
+
+# The wording that used to be hardcoded in the templates. Seeded once, then
+# owned by the committee — `get_or_create` means a later edit is never
+# overwritten by a redeploy.
+PAGE_TEXT = [
+    (PageText.HOME_ABOUT, "About the Gurdwara", """The Sikh Center of SF Bay Area, home of Gurdwara Sahib El Sobrante, has been serving the Bay Area Sikh community since its establishment in 1969. What began as informal gatherings in Berkeley grew into a formal organization with one purpose: to give the Bay Area's growing Sikh population a dedicated place of worship.
+
+In 1976, approximately five acres of hillside in El Sobrante were purchased for the Gurdwara. The first building phase was completed in May 1979, and the current structure, with its golden domes and views over the El Sobrante valley and San Pablo Bay, was completed in June 1992.
+
+Rooted in the teachings of Sri Guru Granth Sahib Ji, the Gurdwara is open to all regardless of faith or background. Langar, a free community meal, is served daily to every visitor."""),
+    (PageText.HOME_VISIT, "Find the Gurdwara",
+     "Situated in the hills of El Sobrante, 25 miles north of San Francisco. "
+     "Free parking available on-site."),
+    (PageText.SCHEDULE_HEADER, "Daily Programme",
+     "Langar is served daily to all visitors."),
+    (PageText.EVENTS_HEADER, "Events & Calendar",
+     "Upcoming programs, Gurpurabs, and the paths booked by the sangat."),
+    (PageText.EVENTS_CALENDAR, "Gurdwara Calendar",
+     "Akhand Paath, Sehaj Paath, Sukhmani Sahib and Anand Karaj bookings, "
+     "alongside Gurpurab and Nanakshahi dates."),
+    (PageText.LIVESTREAM_HEADER, "Livestream",
+     "Daily live diwan on YouTube, morning and evening, 7 days a week."),
+    (PageText.LIVESTREAM_PROGRAM, "Daily Live Program",
+     "7 days a week, streamed live from the Gurdwara."),
+    (PageText.CONTACT_HEADER, "Contact & Directions",
+     "All are welcome."),
+    (PageText.CONTACT_PARKING, "Parking & Access", """Free on-site parking lot on Hillcrest Rd
+Located in the hills of El Sobrante, 25 miles north of San Francisco
+Panoramic views of the El Sobrante valley and San Pablo Bay from the grounds"""),
+    (PageText.CONTACT_EXPECT, "What to Expect", """Head coverings required inside the Darbar Sahib (available at entry)
+Shoes removed before entering (racks provided at the entrance)
+Langar (free meal) served after Sunday Diwan, all are welcome
+All faiths and backgrounds welcome, no prior knowledge of Sikhism needed"""),
+]
+
+STATS = [
+    ("1969", "Year established", 10),
+    ("5 acres", "Hilltop grounds in El Sobrante", 20),
+    ("Daily", "Free langar for all visitors", 30),
+]
+
 
 PROGRAM_ITEMS = [
     {
@@ -114,6 +155,31 @@ class Command(BaseCommand):
             self.style.SUCCESS(
                 f"Slideshow photos: {added} added, "
                 f"{Photo.objects.filter(category=Photo.HERO).count()} total."
+            )
+        )
+
+        created = 0
+        for order, (key, heading, body) in enumerate(PAGE_TEXT, start=1):
+            _, was_created = PageText.objects.get_or_create(
+                key=key,
+                defaults={"heading": heading, "body": body, "sort_order": order * 10},
+            )
+            created += was_created
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Page text: {created} block(s) added, {PageText.objects.count()} total."
+            )
+        )
+
+        created = 0
+        for value, label, order in STATS:
+            _, was_created = Stat.objects.get_or_create(
+                value=value, defaults={"label": label, "sort_order": order}
+            )
+            created += was_created
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Facts: {created} added, {Stat.objects.count()} total."
             )
         )
 

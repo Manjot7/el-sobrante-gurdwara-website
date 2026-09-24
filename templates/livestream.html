@@ -7,10 +7,8 @@
 <section class="bg-navy-800 text-white py-14">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <p class="text-saffron-400 text-sm font-semibold uppercase tracking-widest mb-2">{{ site.name }}</p>
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">Livestream</h1>
-    <p class="text-gray-300 text-sm">
-      Daily live diwan on YouTube — morning and evening, 7 days a week.
-    </p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">{{ text.livestream_header.heading }}</h1>
+    <p class="text-gray-300 text-sm">{{ text.livestream_header.body }}</p>
   </div>
 </section>
 
@@ -56,8 +54,8 @@
   <!-- ── DAILY PROGRAM SCHEDULE ─────────────────────────────────────────── -->
   <div class="bg-white border border-gray-100 rounded-xl shadow-sm mb-6 overflow-hidden">
     <div class="bg-navy-800 text-white px-6 py-4">
-      <h2 class="font-bold text-lg">Daily Live Program</h2>
-      <p class="text-gray-300 text-xs mt-0.5">7 days a week — streamed live from the Gurdwara</p>
+      <h2 class="font-bold text-lg">{{ text.livestream_program.heading }}</h2>
+      <p class="text-gray-300 text-xs mt-0.5">{{ text.livestream_program.body }}</p>
     </div>
     <div class="divide-y divide-gray-50">
       {% for item in program_items %}
