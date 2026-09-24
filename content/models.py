@@ -10,7 +10,6 @@ Field help_text throughout is written for a committee member who has never used
 a CMS. Please keep it that way when adding fields.
 """
 
-import re
 from io import BytesIO
 
 from django.core.files.base import ContentFile
@@ -35,6 +34,12 @@ def process_upload(image_field):
     try:
         image_field.open()
         img = Image.open(image_field)
+        # Ask the JPEG decoder to downscale while reading, instead of building
+        # the full-size bitmap and shrinking afterwards. The host has 512 MB of
+        # RAM shared by two workers; an 8000x6000 photo peaks at ~183 MB decoded
+        # in full but ~46 MB this way. No effect on PNGs or on photos already
+        # near the target size.
+        img.draft("RGB", (MAX_IMAGE_WIDTH, MAX_IMAGE_HEIGHT))
         img.load()
     except (OSError, ValueError):
         # Not a readable image — let Django's own ImageField validation report it.
