@@ -1,9 +1,14 @@
 # Deploys to Fly.io whenever main is pushed, so updating the site is a git
-# push rather than a terminal session — the same workflow Render gave us.
+# push rather than a terminal session.
 #
-# Needs one repository secret: FLY_API_TOKEN
-#   fly tokens create deploy -x 8760h
-# then add it under Settings -> Secrets and variables -> Actions.
+# Until Fly is actually set up this does nothing and passes. It starts
+# deploying on its own the moment the FLY_API_TOKEN secret exists — there is
+# nothing to switch on.
+#
+# To enable:
+#   fly tokens create deploy -x 8760h --app sfsikhcenter
+# then add the output under Settings -> Secrets and variables -> Actions,
+# named FLY_API_TOKEN. See DEPLOY.md.
 name: Deploy to Fly.io
 
 on:
@@ -19,8 +24,30 @@ jobs:
       group: deploy-production
       cancel-in-progress: false
     steps:
+      # Without this gate every push fails with a red X and an email, which
+      # trains everyone to ignore the notifications that will matter later.
+      - name: Check whether Fly is configured
+        id: gate
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          if [ -z "$FLY_API_TOKEN" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "FLY_API_TOKEN is not set — skipping deploy."
+            echo "This is expected until the Fly app has been created."
+            echo "See DEPLOY.md for how to create the token."
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.gate.outputs.ready == 'true'
+
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+        if: steps.gate.outputs.ready == 'true'
+
+      - name: Deploy
+        if: steps.gate.outputs.ready == 'true'
+        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
