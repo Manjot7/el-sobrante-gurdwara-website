@@ -24,6 +24,48 @@ Everything needed is already in the repo: `Dockerfile`, `fly.toml`,
 
 ---
 
+## Trying it out first on a personal account
+
+Worth doing before the real thing. Two rules:
+
+**Do not use the name `sfsikhcenter` for the test.** Fly app names are unique
+across all of Fly — organizations do not namespace them, because every app
+gets `<name>.fly.dev`. Testing under the real name burns it, and the
+gurdwara's account then cannot have it.
+
+```bash
+fly apps create sfsikhcenter-test --org personal
+```
+
+Pass `--app sfsikhcenter-test` to the rest of the commands rather than editing
+`fly.toml`, so nothing needs reverting afterwards.
+
+**Do not add `FLY_API_TOKEN` to GitHub yet.** With it set, every push
+auto-deploys to the throwaway app. Deploy by hand with `fly deploy` while
+testing.
+
+What to expect on the free trial: 2 VM-hours total or 7 days, whichever comes
+first, and trial machines stop after 5 minutes of running. Enough to confirm
+the build works and click around the admin; not enough to leave up.
+
+Don't enter real content — photos, events, wording. None of it transfers, and
+the seed data comes back by itself on the real deployment.
+
+When finished:
+
+```bash
+fly apps destroy sfsikhcenter-test
+```
+
+That stops it billing if a card is ever added to that account.
+
+> If you do end up testing under the real name, `fly apps move <app> --org
+> <org>` moves an app with its volume data, secrets and certificates intact.
+> It works, but it occasionally errors and needs membership of both orgs — the
+> throwaway name avoids the problem rather than handling it.
+
+---
+
 ## One-time deployment
 
 ### 1. Install flyctl and sign in
