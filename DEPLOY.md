@@ -1,211 +1,121 @@
-# Hosting the site for free — frontend and backend
+# Deploying the site
 
-This puts the **whole site online**, including the admin, so the committee can
-log in and try adding a photo themselves.
+Host: **Fly.io**, about **$3.50/month** — $3.32 for an always-on 512 MB machine
+plus $0.15 for a 1 GB volume. Render stays configured as a fallback; see the
+end of this file.
 
-Host: **Render free plan**. The repo already contains `render.yaml`, so Render
-configures itself — you don't have to fill in build commands.
-
-**Roughly 10 minutes.** You need a browser and your GitHub login.
-
----
-
-## Before you start — two things to know
-
-**1. The site sleeps.** On the free plan it shuts down after 15 minutes with no
-visitors, and the next person to open it waits about 50 seconds for it to wake.
-Open the link yourself a minute before you send it to anyone.
-
-**2. Uploads don't survive.** The free plan wipes its disk on every restart and
-deploy. Photos or events added through the admin **will disappear**. The site
-rebuilds its starting content automatically each time, so it always comes back
-looking right — but tell the committee their test uploads are temporary.
-
-Both problems go away on the $7/month Starter plan with a disk attached
-(see [HOSTING.md](HOSTING.md)). Everything else works identically, so this is a
-genuine preview, not a mock-up.
+Everything needed is already in the repo: `Dockerfile`, `fly.toml`,
+`docker-entrypoint.sh`, and a GitHub Action for automatic deploys.
 
 ---
 
-## Step 1 — Create the Render account
+## Who does what
 
-1. Go to **https://render.com**
-2. **Get Started** → **GitHub** → sign in
-3. Authorise Render. When it asks which repositories, you can grant access to
-   **only** `el-sobrante-gurdwara-website`
+**The gurdwara** — browser only, about five minutes:
 
-No card is required for the free plan.
+1. Create the account at [fly.io](https://fly.io) — **no card needed yet**
+2. Organization dropdown → **Team** → invite the developer's Fly email as a **Member**
+3. Later, once the site is confirmed working, add the payment card
 
-## Step 2 — Create the service from the blueprint
+**The developer** — once, from a terminal: everything below.
 
-1. In the Render dashboard: **New +** → **Blueprint**
-2. Pick the **`el-sobrante-gurdwara-website`** repository
-3. Render reads `render.yaml` and shows a service called
-   **`sikh-center-website`** on the **Free** plan
-4. **Don't deploy yet** — do step 3 first, or you'll have no way to log in
-
-> If Render doesn't offer "Blueprint", use **New + → Web Service** instead, pick
-> the repo, and set: Runtime **Python 3**, Build Command **`./build.sh`**,
-> Start Command **`gunicorn gurdwara_site.wsgi:application`**, Plan **Free**.
-
-## Step 3 — Set the admin login
-
-Still on the setup screen, open **Environment** / **Environment Variables** and
-add three:
-
-| Key | Value |
-|---|---|
-| `DJANGO_SUPERUSER_USERNAME` | `admin` (or whatever you like) |
-| `DJANGO_SUPERUSER_EMAIL` | your email |
-| `DJANGO_SUPERUSER_PASSWORD` | **a password you choose** |
-
-This is how the admin account gets created. The password lives only in Render —
-it is never in the repo, and nobody else sees it.
-
-Pick something real. This login can change the live website.
-
-`DJANGO_SECRET_KEY` and `DJANGO_DEBUG` are already handled by `render.yaml`;
-you don't need to add them.
-
-## Step 4 — Deploy
-
-Click **Apply** / **Create**. The first build takes 3–5 minutes — it installs
-Django, sets up the database, loads the history photos and daily programme, and
-creates your admin login.
-
-Watch the log. It's finished when you see something like
-`Your service is live 🎉`.
-
-You'll get a URL like:
-
-```
-https://sikh-center-website.onrender.com
-```
-
-## Step 5 — Check it works
-
-1. Open the URL. The homepage should show the photo slideshow and the nine
-   history photos.
-2. Go to **`/admin`** and log in with the username and password from step 3.
-3. Try it: **Photos on the website → Add**, upload any photo, set *Where it
-   appears* to **Home page slideshow**, save, then reload the homepage.
-
-If the admin login gives a **CSRF** error, add one more environment variable
-and redeploy — replace with your actual URL:
-
-```
-DJANGO_CSRF_TRUSTED_ORIGINS=https://sikh-center-website.onrender.com
-```
+> If Fly asks the invited member for *their own* card, stop and fall back to
+> Render. Nobody should be putting a personal card on the gurdwara's project.
 
 ---
 
-## Sending it to the committee
+## One-time deployment
 
-Give them **two** links and a warning:
-
-```
-The website: https://sikh-center-website.onrender.com
-
-Please note it can take up to a minute to load the first time,
-as the free hosting puts it to sleep when nobody is using it.
-```
-
-Only share the `/admin` link with whoever should be editing, along with their
-own login — don't reuse yours. To add someone:
-
-1. `/admin` → you'll need to create the user (Users are hidden from the normal
-   admin on purpose)
-2. Easier: send me the name and I'll add a management command for it
-
----
-
-## Updating the site later
-
-Every push to `main` redeploys automatically:
+### 1. Install flyctl and sign in
 
 ```bash
-git add -A; if ($?) { git commit -m "Update site"; git push origin main }
+iwr https://fly.io/install.ps1 -useb | iex
 ```
 
-Remember that a redeploy wipes uploaded photos on the free plan.
+```bash
+fly auth login
+```
+
+### 2. Create the app in the gurdwara's organization
+
+`fly.toml` already holds the configuration, so this just registers the name.
+Get the organization slug from `fly orgs list`.
+
+```bash
+fly apps create sfsikhcenter --org <org-slug>
+```
+
+If the name is taken, pick another and change `app =` at the top of `fly.toml`.
+
+### 3. Create the volume
+
+This is what keeps the database and the uploaded photos. Without it,
+everything the committee adds is wiped on the next deploy.
+
+```bash
+fly volumes create sikh_center_data --region sjc --size 1 --app sfsikhcenter
+```
+
+### 4. Set the secrets
+
+These create the admin login. Pick a real password — this account can change
+the live website. The values live in Fly, never in the repo.
+
+```bash
+fly secrets set DJANGO_SECRET_KEY="$(python -c 'import secrets;print(secrets.token_urlsafe(50))')" DJANGO_SUPERUSER_USERNAME="admin" DJANGO_SUPERUSER_EMAIL="someone@example.com" --app sfsikhcenter
+```
+
+Then the password on its own, so it doesn't sit in shell history:
+
+```bash
+fly secrets set DJANGO_SUPERUSER_PASSWORD --app sfsikhcenter
+```
+
+### 5. Deploy
+
+```bash
+fly deploy
+```
+
+The first build takes a few minutes. On start the container migrates the
+database, loads the history photos, programme and page text, creates the
+editors group, and creates the admin login. Watch the log for
+`==> Admin login created`.
+
+### 6. Check it
+
+```bash
+fly open
+```
+
+- The site loads at `https://sfsikhcenter.fly.dev`
+- `/admin` accepts the username and password from step 4
+- Upload a photo, run `fly deploy` again, confirm it survived — that proves
+  the volume is working
 
 ---
 
-## What this does *not* include
+## Pointing sfsikhcenter.com at it
 
-- **The Google Calendar** still shows "not connected yet" until you paste the
-  Calendar ID into *Gurdwara details* in the admin (see
-  [COMMITTEE-QUESTIONS.md](COMMITTEE-QUESTIONS.md), task B)
-- **The donate page** — not built, waiting on the committee's decision
-- **A custom domain.** `thesikhcenter.com` can be pointed at Render later, but
-  a custom domain on the free plan still sleeps
+### 1. Tell Django the domain — do this first
 
----
-
-## If you'd rather it never slept
-
-**PythonAnywhere** has a free plan with no sleeping *and* a disk that keeps
-uploaded photos — better for a demo in those two ways. The trade-off is that
-setup is manual (no `render.yaml` equivalent, you configure the web app by
-hand) and updates need a manual pull rather than a git push. Worth it if the
-committee will be poking at the site over several days rather than one sitting.
-Say the word and I'll write those steps out.
-
----
-
-# Putting the site on the gurdwara's own domain
-
-## Do this first: leave the free plan
-
-The free plan is fine for showing people a preview. It is **not** fine once
-the site is at the gurdwara's real address:
-
-- **It sleeps.** After 15 idle minutes the next visitor waits ~50 seconds
-  looking at nothing. Most people assume the site is broken and leave.
-- **Uploads are deleted.** Every restart and deploy wipes the disk. A Vaisakhi
-  poster added in the admin will disappear without warning.
-
-Fix both at once — Render → the service → **Settings**:
-
-1. **Instance Type** → **Starter** (~$7/month). Stops the sleeping.
-2. **Disks** → **Add Disk**, mount path `/data`, 1 GB. Keeps the uploads.
-3. **Environment** → add `DJANGO_DATA_DIR` = `/data`
-
-> Step 3 moves the database onto the new disk, which starts empty — so
-> anything already added through the admin is left behind. Do this **before**
-> the committee starts adding content, not after. The build re-seeds the
-> history photos and programme, and recreates the admin login from the
-> `DJANGO_SUPERUSER_*` variables.
-
-## Then point the domain
-
-Replace `YOURDOMAIN.org` with the real one throughout.
-
-### 1. Tell Render about the domain
-
-Service → **Settings** → **Custom Domains** → **Add Custom Domain**.
-
-Add **both**:
-- `YOURDOMAIN.org`
-- `www.YOURDOMAIN.org`
-
-Render then shows the exact DNS records to create. Use the values Render
-displays — don't copy them from anywhere else, they differ per service.
-
-### 2. Tell Django about the domain — *do this before the DNS*
-
-Environment → add:
-
-```
-DJANGO_ALLOWED_HOSTS=YOURDOMAIN.org,www.YOURDOMAIN.org
+```bash
+fly secrets set DJANGO_ALLOWED_HOSTS="sfsikhcenter.com,www.sfsikhcenter.com" --app sfsikhcenter
 ```
 
-Django refuses any hostname not in this list with a bare **"Bad Request
-(400)"**. Setting it first means the site works the instant DNS resolves,
-rather than serving errors while you work out why.
+Django refuses any hostname not in this list with a bare **Bad Request (400)**.
+Setting it first means the site works the moment DNS resolves, instead of
+serving errors while you work out why. Nothing else is needed — every host in
+this list is trusted for admin logins automatically.
 
-Nothing else is needed — form submissions and admin logins are trusted for
-every host in this list automatically.
+### 2. Get the addresses
+
+```bash
+fly ips list --app sfsikhcenter
+```
+
+Fly allocates a shared IPv4 and a dedicated IPv6 by default. The shared IPv4
+is fine; a dedicated one costs $2/month and this site doesn't need it.
 
 ### 3. Add the DNS records at GoDaddy
 
@@ -213,34 +123,114 @@ every host in this list automatically.
 
 | Type | Name | Value |
 |---|---|---|
-| CNAME | `www` | the `.onrender.com` hostname Render showed you |
-| A | `@` | the IP address Render showed you |
+| A | `@` | the IPv4 from `fly ips list` |
+| AAAA | `@` | the IPv6 from `fly ips list` |
+| CNAME | `www` | `sfsikhcenter.fly.dev` |
 
-Then **delete any existing `A` or `CNAME` records for `@` and `www`** that
-GoDaddy created for its parking page. Leaving them causes the domain to
-resolve intermittently to the wrong place, which is confusing to debug.
+**Delete GoDaddy's existing parking-page records for `@` and `www` first.**
+Leaving them makes the domain resolve intermittently to the wrong place, which
+is miserable to diagnose.
 
-Do **not** use GoDaddy's "Forwarding" feature. That points the domain at
-another URL instead of hosting the site, and breaks HTTPS.
+Do **not** use GoDaddy's "Forwarding" feature — it breaks HTTPS.
 
-### 4. Wait for the certificate
+> To issue a certificate Fly must verify the domain, using the AAAA record, a
+> `_acme-challenge` CNAME, or a `_fly-ownership` TXT record. The AAAA record
+> above covers it. `fly certs show` prints what it's still waiting for.
 
-Render issues a free SSL certificate automatically once it can see the DNS.
-Usually a few minutes; occasionally up to an hour. The custom domain shows as
-**Verified** in Render when it's done.
+### 4. Request the certificates
 
-Until then the site may show a certificate warning. That's expected — don't
-send the link to anyone yet.
+```bash
+fly certs add sfsikhcenter.com --app sfsikhcenter
+```
 
-## Checking it worked
+```bash
+fly certs add www.sfsikhcenter.com --app sfsikhcenter
+```
 
-- `https://YOURDOMAIN.org` loads with a padlock, no warning
-- `https://www.YOURDOMAIN.org` does the same
-- `/admin` lets you log in (a CSRF error here means step 2 was missed)
-- Upload a photo, redeploy, confirm it is still there — proves the disk works
+```bash
+fly certs check sfsikhcenter.com --app sfsikhcenter
+```
 
-## What about thesikhcenter.com?
+Usually a few minutes. Don't send the link to anyone until both show as
+issued, or they'll get a certificate warning.
 
-Separate decision. It currently runs a different site on someone else's
-server. Options: leave it alone, redirect it to the new domain, or move it
-across. Redirecting needs whoever administers that server, not GoDaddy.
+---
+
+## Updating the site afterwards
+
+Push to `main` and the GitHub Action deploys automatically — no terminal.
+
+One-time setup for that:
+
+```bash
+fly tokens create deploy -x 8760h --app sfsikhcenter
+```
+
+Add the output as a repository secret named **`FLY_API_TOKEN`** under
+*Settings → Secrets and variables → Actions*. The token lasts a year.
+
+To deploy by hand instead: `fly deploy`.
+
+---
+
+## Things worth knowing
+
+- **A deploy costs a few seconds of downtime.** A volume attaches to exactly
+  one machine, so the old one stops before the new one starts. Unavoidable at
+  this price on any host, and deploys will be rare.
+- **Never scale past one machine.** The database is SQLite on that one volume;
+  a second machine would get its own empty volume and serve different content.
+  `fly scale count 1` if it ever drifts.
+- **Backups are automatic.** Fly snapshots volumes daily, and snapshot storage
+  is free under 10 GB — this volume is 1 GB. List them with
+  `fly volumes snapshots list <volume-id>`.
+- **The machine must never sleep.** `auto_stop_machines = false` and
+  `min_machines_running = 1` in `fly.toml` are exactly what you're paying for.
+  Fly's defaults are the opposite.
+
+## Useful commands
+
+```bash
+fly logs --app sfsikhcenter
+```
+
+```bash
+fly status --app sfsikhcenter
+```
+
+```bash
+fly ssh console --app sfsikhcenter
+```
+
+---
+
+## Three settings that look wrong but aren't
+
+Anyone tidying this config later will be tempted to "fix" these. Don't.
+
+**`DJANGO_DEBUG=false` during `collectstatic` in the Dockerfile.** With DEBUG
+on, `settings.py` selects the plain static-files backend, no
+`staticfiles.json` manifest is written, and the container then crashes at
+runtime when the manifest backend looks for it. Verified in both directions.
+
+**`DJANGO_SSL_REDIRECT=false` in `fly.toml`.** Fly's `force_https` already
+redirects at the edge. Doing it in Django as well means Fly's internal health
+checks, which arrive over plain HTTP, get a 301 back and can mark a perfectly
+healthy container as failing.
+
+**Migrations run in the entrypoint, not a Fly `release_command`.** A
+release-command machine doesn't mount the volume, so it would migrate a
+throwaway database and leave the real one untouched.
+
+---
+
+## Fallback: Render
+
+`render.yaml` and `build.sh` are still in the repo and still work. Render is
+~$7.25/month, deploys from a web dashboard rather than a CLI, and handles the
+apex domain with a single A record. Use it if Fly turns out to be awkward —
+the application code is identical either way.
+
+Render setup: **New → Blueprint** → pick the repo → fill in the three
+`DJANGO_SUPERUSER_*` values → set **Instance Type: Starter** and add a 1 GB
+disk at `/data` with `DJANGO_DATA_DIR=/data`.
