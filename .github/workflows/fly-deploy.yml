@@ -1,0 +1,26 @@
+# Deploys to Fly.io whenever main is pushed, so updating the site is a git
+# push rather than a terminal session — the same workflow Render gave us.
+#
+# Needs one repository secret: FLY_API_TOKEN
+#   fly tokens create deploy -x 8760h
+# then add it under Settings -> Secrets and variables -> Actions.
+name: Deploy to Fly.io
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

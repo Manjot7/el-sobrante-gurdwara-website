@@ -25,10 +25,16 @@ ALLOWED_HOSTS = [
     if h.strip()
 ]
 
-# Render (and most PaaS hosts) inject the public hostname at runtime.
+# Hosts inject their own public hostname at runtime, under their own name.
+# Picking these up automatically means a fresh deploy answers on its default
+# address without anyone having to set a variable first.
 _render_host = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if _render_host:
     ALLOWED_HOSTS.append(_render_host)
+
+_fly_app = os.environ.get("FLY_APP_NAME")
+if _fly_app:
+    ALLOWED_HOSTS.append(f"{_fly_app}.fly.dev")
 
 CSRF_TRUSTED_ORIGINS = [
     o.strip()
@@ -148,7 +154,13 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 25 * 1024 * 1024
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-    SECURE_SSL_REDIRECT = True
+
+    # Some hosts redirect HTTP to HTTPS at their own edge (Fly's force_https).
+    # Doing it in Django as well is not just redundant: the host's internal
+    # health checks hit the container over plain HTTP, get a 301 back, and can
+    # mark a perfectly healthy container as failing. Turn this off wherever the
+    # platform already handles it.
+    SECURE_SSL_REDIRECT = _env_bool("DJANGO_SSL_REDIRECT", True)
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_CONTENT_TYPE_NOSNIFF = True

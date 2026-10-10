@@ -1,0 +1,51 @@
+# Fly.io configuration for the Sikh Center of SF Bay Area website.
+#
+# Deploy with:  fly deploy
+# Full setup instructions are in DEPLOY.md.
+
+app = "sfsikhcenter"       # change if this name is taken
+primary_region = "sjc"     # San Jose — closest region to the Bay Area
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  DJANGO_DEBUG = "false"
+  # The database and uploaded photos both live on the volume mounted below.
+  DJANGO_DATA_DIR = "/data"
+  # Fly's proxy already redirects HTTP to HTTPS (force_https, further down).
+  # Letting Django redirect as well makes its internal health checks, which
+  # arrive over plain HTTP, get a 301 and look like failures.
+  DJANGO_SSL_REDIRECT = "false"
+
+# Persistent storage. Without this the database and every uploaded photo are
+# wiped on each deploy. One volume attaches to exactly one machine, which is
+# also why this app stays at a single machine.
+[[mounts]]
+  source = "sikh_center_data"
+  destination = "/data"
+  initial_size = "1gb"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+
+  # The whole point of paying for this tier: the site must not sleep.
+  # Fly's defaults are auto_stop_machines = "stop" and min_machines_running = 0,
+  # which scales to zero and gives the first visitor of the morning a cold
+  # start. Both values below are deliberate — don't "tidy" them away.
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 40
+    hard_limit = 60
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
+  # A small swap file costs nothing and stops a large photo upload from
+  # OOM-killing the container on a 512 MB machine.
+  swap_size_mb = 512
